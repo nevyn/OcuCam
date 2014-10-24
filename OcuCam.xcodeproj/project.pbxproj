@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		05DCE31119F9A80F0067EFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE31019F9A80F0067EFBD /* main.m */; };
 		05DCE31419F9A80F0067EFBD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE31319F9A80F0067EFBD /* AppDelegate.m */; };
-		05DCE31719F9A80F0067EFBD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE31619F9A80F0067EFBD /* ViewController.m */; };
 		05DCE31A19F9A80F0067EFBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE31819F9A80F0067EFBD /* Main.storyboard */; };
 		05DCE31C19F9A80F0067EFBD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE31B19F9A80F0067EFBD /* Images.xcassets */; };
 		05DCE31F19F9A80F0067EFBD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE31D19F9A80F0067EFBD /* LaunchScreen.xib */; };
 		05DCE32B19F9A80F0067EFBD /* OcuCamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE32A19F9A80F0067EFBD /* OcuCamTests.m */; };
+		05DCE33619FA49BC0067EFBD /* ExtVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE33519FA49BC0067EFBD /* ExtVC.m */; };
+		05DCE33819FA4E650067EFBD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DCE33719FA4E650067EFBD /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +33,15 @@
 		05DCE31019F9A80F0067EFBD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		05DCE31219F9A80F0067EFBD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		05DCE31319F9A80F0067EFBD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		05DCE31519F9A80F0067EFBD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		05DCE31619F9A80F0067EFBD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		05DCE31919F9A80F0067EFBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		05DCE31B19F9A80F0067EFBD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		05DCE31E19F9A80F0067EFBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		05DCE32419F9A80F0067EFBD /* OcuCamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OcuCamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DCE32919F9A80F0067EFBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DCE32A19F9A80F0067EFBD /* OcuCamTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OcuCamTests.m; sourceTree = "<group>"; };
+		05DCE33419FA49BC0067EFBD /* ExtVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtVC.h; sourceTree = "<group>"; };
+		05DCE33519FA49BC0067EFBD /* ExtVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtVC.m; sourceTree = "<group>"; };
+		05DCE33719FA4E650067EFBD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05DCE33819FA4E650067EFBD /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 		05DCE30219F9A80F0067EFBD = {
 			isa = PBXGroup;
 			children = (
+				05DCE33719FA4E650067EFBD /* AVFoundation.framework */,
 				05DCE30D19F9A80F0067EFBD /* OcuCam */,
 				05DCE32719F9A80F0067EFBD /* OcuCamTests */,
 				05DCE30C19F9A80F0067EFBD /* Products */,
@@ -83,8 +87,8 @@
 			children = (
 				05DCE31219F9A80F0067EFBD /* AppDelegate.h */,
 				05DCE31319F9A80F0067EFBD /* AppDelegate.m */,
-				05DCE31519F9A80F0067EFBD /* ViewController.h */,
-				05DCE31619F9A80F0067EFBD /* ViewController.m */,
+				05DCE33419FA49BC0067EFBD /* ExtVC.h */,
+				05DCE33519FA49BC0067EFBD /* ExtVC.m */,
 				05DCE31819F9A80F0067EFBD /* Main.storyboard */,
 				05DCE31B19F9A80F0067EFBD /* Images.xcassets */,
 				05DCE31D19F9A80F0067EFBD /* LaunchScreen.xib */,
@@ -219,7 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05DCE31719F9A80F0067EFBD /* ViewController.m in Sources */,
+				05DCE33619FA49BC0067EFBD /* ExtVC.m in Sources */,
 				05DCE31419F9A80F0067EFBD /* AppDelegate.m in Sources */,
 				05DCE31119F9A80F0067EFBD /* main.m in Sources */,
 			);
@@ -414,6 +418,7 @@
 				05DCE33019F9A80F0067EFBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		05DCE33119F9A80F0067EFBD /* Build configuration list for PBXNativeTarget "OcuCamTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +427,7 @@
 				05DCE33319F9A80F0067EFBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
