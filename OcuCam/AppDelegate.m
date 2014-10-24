@@ -1,14 +1,28 @@
 #import "AppDelegate.h"
 #import "ExtVC.h"
+#import "EVILViewController.h"
+@import AVFoundation;
 
 @interface AppDelegate ()
 
 @end
 
-@interface Foo : UIViewController
+@interface Foo : EVILViewController
 @property(nonatomic) IBOutlet UITextView *text;
 @end
 @implementation Foo
+{
+	AVPlayer *a, *b, *c, *d, *e;
+}
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	a = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/by your command" withExtension:@"wav"]];
+	b = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/extermination" withExtension:@"wav"]];
+	c = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/fire weapons" withExtension:@"wav"]];
+	d = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/leave no survivors" withExtension:@"wav"]];
+	e = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/scan for identification" withExtension:@"wav"]];
+}
 - (ExtVC*)ext
 {
 	return [(AppDelegate*)[[UIApplication sharedApplication] delegate] valueForKey:@"externalVC"];
@@ -20,6 +34,32 @@
 - (IBAction)b:(id)sender
 {
 	[self.ext b];
+}
+
+- (IBAction)s1:(id)sender
+{
+    [a seekToTime:CMTimeMake(0, 1)];
+	[a play];
+}
+- (IBAction)s2:(id)sender
+{
+    [b seekToTime:CMTimeMake(0, 1)];
+	[b play];
+}
+- (IBAction)s3:(id)sender
+{
+    [c seekToTime:CMTimeMake(0, 1)];
+	[c play];
+}
+- (IBAction)s4:(id)sender
+{
+    [d seekToTime:CMTimeMake(0, 1)];
+	[d play];
+}
+- (IBAction)s5:(id)sender
+{
+    [e seekToTime:CMTimeMake(0, 1)];
+	[e play];
 }
 @end
 

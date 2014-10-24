@@ -15,6 +15,11 @@
 		05DCE32B19F9A80F0067EFBD /* OcuCamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE32A19F9A80F0067EFBD /* OcuCamTests.m */; };
 		05DCE33619FA49BC0067EFBD /* ExtVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE33519FA49BC0067EFBD /* ExtVC.m */; };
 		05DCE33819FA4E650067EFBD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DCE33719FA4E650067EFBD /* AVFoundation.framework */; };
+		05DCE34619FA89880067EFBD /* EVILLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE33A19FA89870067EFBD /* EVILLayer.m */; };
+		05DCE34719FA89880067EFBD /* EVILViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE33C19FA89870067EFBD /* EVILViewController.m */; };
+		05DCE34819FA89880067EFBD /* InnerGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE33D19FA89870067EFBD /* InnerGlow.png */; };
+		05DCE34919FA89880067EFBD /* OuterGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE33E19FA89870067EFBD /* OuterGlow.png */; };
+		05DCE35119FA8A5F0067EFBD /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE35019FA8A5F0067EFBD /* sounds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +47,13 @@
 		05DCE33419FA49BC0067EFBD /* ExtVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtVC.h; sourceTree = "<group>"; };
 		05DCE33519FA49BC0067EFBD /* ExtVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtVC.m; sourceTree = "<group>"; };
 		05DCE33719FA4E650067EFBD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		05DCE33919FA89870067EFBD /* EVILLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVILLayer.h; sourceTree = SOURCE_ROOT; };
+		05DCE33A19FA89870067EFBD /* EVILLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVILLayer.m; sourceTree = SOURCE_ROOT; };
+		05DCE33B19FA89870067EFBD /* EVILViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVILViewController.h; sourceTree = SOURCE_ROOT; };
+		05DCE33C19FA89870067EFBD /* EVILViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVILViewController.m; sourceTree = SOURCE_ROOT; };
+		05DCE33D19FA89870067EFBD /* InnerGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InnerGlow.png; sourceTree = SOURCE_ROOT; };
+		05DCE33E19FA89870067EFBD /* OuterGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OuterGlow.png; sourceTree = SOURCE_ROOT; };
+		05DCE35019FA8A5F0067EFBD /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = "../../../Dev/halloween-cyborg/CylonicCA/sounds"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +101,13 @@
 				05DCE31319F9A80F0067EFBD /* AppDelegate.m */,
 				05DCE33419FA49BC0067EFBD /* ExtVC.h */,
 				05DCE33519FA49BC0067EFBD /* ExtVC.m */,
+				05DCE33919FA89870067EFBD /* EVILLayer.h */,
+				05DCE33A19FA89870067EFBD /* EVILLayer.m */,
+				05DCE33B19FA89870067EFBD /* EVILViewController.h */,
+				05DCE33C19FA89870067EFBD /* EVILViewController.m */,
+				05DCE33D19FA89870067EFBD /* InnerGlow.png */,
+				05DCE33E19FA89870067EFBD /* OuterGlow.png */,
+				05DCE35019FA8A5F0067EFBD /* sounds */,
 				05DCE31819F9A80F0067EFBD /* Main.storyboard */,
 				05DCE31B19F9A80F0067EFBD /* Images.xcassets */,
 				05DCE31D19F9A80F0067EFBD /* LaunchScreen.xib */,
@@ -204,6 +223,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				05DCE31A19F9A80F0067EFBD /* Main.storyboard in Resources */,
+				05DCE34919FA89880067EFBD /* OuterGlow.png in Resources */,
+				05DCE35119FA8A5F0067EFBD /* sounds in Resources */,
+				05DCE34819FA89880067EFBD /* InnerGlow.png in Resources */,
 				05DCE31F19F9A80F0067EFBD /* LaunchScreen.xib in Resources */,
 				05DCE31C19F9A80F0067EFBD /* Images.xcassets in Resources */,
 			);
@@ -226,6 +248,8 @@
 				05DCE33619FA49BC0067EFBD /* ExtVC.m in Sources */,
 				05DCE31419F9A80F0067EFBD /* AppDelegate.m in Sources */,
 				05DCE31119F9A80F0067EFBD /* main.m in Sources */,
+				05DCE34619FA89880067EFBD /* EVILLayer.m in Sources */,
+				05DCE34719FA89880067EFBD /* EVILViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
