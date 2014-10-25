@@ -7,12 +7,10 @@
 //
 
 #import "EVILViewController.h"
-#import "EVILLayer.h"
+
 
 @implementation EVILViewController
-{
-	EVILLayer *_evil;
-}
+
 - (BOOL)prefersStatusBarHidden
 {
     return YES;

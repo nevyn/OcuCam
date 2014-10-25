@@ -76,6 +76,8 @@
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [_swooshTimer invalidate];
+	
+	p = MAX(120, MIN(self.frame.size.width-120, p));
     
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"position.x"];
     anim.fromValue = @([(CALayer*)_innerImage.presentationLayer position].x);

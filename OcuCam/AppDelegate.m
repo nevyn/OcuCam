@@ -1,7 +1,9 @@
 #import "AppDelegate.h"
 #import "ExtVC.h"
 #import "EVILViewController.h"
+
 @import AVFoundation;
+@import GameController;
 
 @interface AppDelegate ()
 
@@ -70,6 +72,9 @@
 	UIScreen *_screen;
 }
 
+- (Foo*)foo {
+	return (Foo*)self.window.rootViewController;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -85,8 +90,32 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged:) name:UIScreenDidDisconnectNotification object:nil];
 	[self screensChanged:nil];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupControllers:) name:GCControllerDidConnectNotification object:nil];
+	[GCController startWirelessControllerDiscoveryWithCompletionHandler:nil];
+	[self setupControllers:nil];
+	
 	return YES;
 }
+
+- (void)setupControllers:(NSNotification*)notif
+{
+	int i = 0;
+	for(GCController *controller in [GCController controllers]) {
+		NSLog(@"Connecting controller %@", controller);
+		if(controller.playerIndex == GCControllerPlayerIndexUnset)
+			controller.playerIndex = i++;
+		
+		controller.extendedGamepad.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue) {
+			if(yValue > -0.05 && yValue < 0.05) {
+				[self.foo.evil performSelector:@selector(animateEye) withObject:nil afterDelay:1];
+			} else {
+				[NSObject cancelPreviousPerformRequestsWithTarget:self.foo.evil selector:@selector(animateEye) object:nil];
+				[self.foo.evil moveEyeTo:((xValue*0.5)+0.5)*self.foo.evil.frame.size.width animated:NO];
+			}
+		};
+	}
+}
+
 
 - (void)screensChanged:(NSNotification*)notif
 {
