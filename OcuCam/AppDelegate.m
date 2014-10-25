@@ -73,6 +73,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	NSError *err;
+	if(!([[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&err])) {
+		NSLog(@"ASCategErr: %@", err);
+	}
+	if(![[AVAudioSession sharedInstance] setActive:YES error:&err]) {
+		NSLog(@"ASSerr: %@", err);
+	}
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged:) name:UIScreenDidConnectNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged:) name:UIScreenDidDisconnectNotification object:nil];
 	[self screensChanged:nil];
