@@ -10,34 +10,37 @@
 #import "EVILLayer.h"
 
 @implementation EVILViewController
+{
+	EVILLayer *_evil;
+}
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
 - (void)viewDidLoad
 {
-    EVILLayer *layer = [[EVILLayer alloc] init];
-    layer.frame = self.view.bounds;
-    [self.view.layer addSublayer:layer];
+    _evil = [[EVILLayer alloc] init];
+    _evil.frame = self.view.bounds;
+    [self.view.layer addSublayer:_evil];
 }
 
 - (void)viewDidLayoutSubviews
 {
-    [self.view.layer.sublayers[0] setFrame:self.view.bounds];
+    [_evil setFrame:self.view.bounds];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.view.layer.sublayers[0] moveEyeTo:[[touches anyObject] locationInView:self.view].x animated:YES];
+    [_evil moveEyeTo:[[touches anyObject] locationInView:self.view].x animated:YES];
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.view.layer.sublayers[0] moveEyeTo:[[touches anyObject] locationInView:self.view].x animated:NO];
+    [_evil moveEyeTo:[[touches anyObject] locationInView:self.view].x animated:NO];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.view.layer.sublayers[0] animateEye];
+    [_evil animateEye];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ExtVC.h"
 #import <AVFoundation/AVFoundation.h>
+#import "OcuCam-Swift.h"
 
 @interface ExtVC ()
 
@@ -40,7 +41,6 @@
     if(!_device) {
 		NSLog(@"Aww no device");
 		self.view.backgroundColor = [UIColor redColor];
-        return;
     }
     
     // 2. Input
@@ -49,34 +49,40 @@
     if(!_videoInput || ![_captureSession canAddInput:_videoInput]) {
         NSLog(@"-[[AVCaptureDeviceInput alloc] initWithDevice:error:]: %@", error);
 		self.view.backgroundColor = [UIColor redColor];
-        return;
     }
-	
-    // 4. Configure
-    [_captureSession beginConfiguration];
-        _captureSession.sessionPreset = AVCaptureSessionPresetMedium;
-        [_captureSession addInput:_videoInput];
-    [_captureSession commitConfiguration];
-
-	// 5. Run!
-    [_captureSession startRunning];
 	
 	CGRect r = self.view.bounds;
 	r.size.width /= 2;
-    _preview = [AVCaptureVideoPreviewLayer layerWithSession:_captureSession];
-	_preview.frame = r;
-	_preview.orientation = AVCaptureVideoOrientationLandscapeLeft;
-	_preview.automaticallyAdjustsMirroring = NO;
-	_preview.mirrored = NO;
 	
-	r.origin.x += r.size.width;
+	if(_videoInput) {
+		// 4. Configure
+		[_captureSession beginConfiguration];
+			_captureSession.sessionPreset = AVCaptureSessionPresetMedium;
+			[_captureSession addInput:_videoInput];
+		[_captureSession commitConfiguration];
+
+		// 5. Run!
+		[_captureSession startRunning];
+		
+		_preview = [AVCaptureVideoPreviewLayer layerWithSession:_captureSession];
+		_preview.frame = r;
+		_preview.orientation = AVCaptureVideoOrientationLandscapeLeft;
+		_preview.automaticallyAdjustsMirroring = NO;
+		_preview.mirrored = NO;
+	}
+	
 	_replicator = [CAReplicatorLayer layer];
 	_replicator.frame = self.view.bounds;
 	_replicator.instanceCount = 2;
 	[self adjustTransform];
-	[_replicator addSublayer:_preview];
+	if(_preview)
+		[_replicator addSublayer:_preview];
+	OcuHUDLayer *hud = [[OcuHUDLayer alloc] initWithFrame:r];
+	[_replicator addSublayer:hud];
+	
 	
 	[self.view.layer addSublayer:_replicator];
+	[hud addAnimations];
 }
 
 - (void)a

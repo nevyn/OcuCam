@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051E520C19FBB43700AAD15E /* OcuHUDLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E520B19FBB43700AAD15E /* OcuHUDLayer.swift */; };
 		05DCE31119F9A80F0067EFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE31019F9A80F0067EFBD /* main.m */; };
 		05DCE31419F9A80F0067EFBD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE31319F9A80F0067EFBD /* AppDelegate.m */; };
 		05DCE31A19F9A80F0067EFBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE31819F9A80F0067EFBD /* Main.storyboard */; };
@@ -33,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		051E520A19FBB43600AAD15E /* OcuCam-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OcuCam-Bridging-Header.h"; sourceTree = "<group>"; };
+		051E520B19FBB43700AAD15E /* OcuHUDLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OcuHUDLayer.swift; sourceTree = "<group>"; };
 		05DCE30B19F9A80F0067EFBD /* OcuCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OcuCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DCE30F19F9A80F0067EFBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DCE31019F9A80F0067EFBD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -105,6 +108,7 @@
 				05DCE33A19FA89870067EFBD /* EVILLayer.m */,
 				05DCE33B19FA89870067EFBD /* EVILViewController.h */,
 				05DCE33C19FA89870067EFBD /* EVILViewController.m */,
+				051E520B19FBB43700AAD15E /* OcuHUDLayer.swift */,
 				05DCE33D19FA89870067EFBD /* InnerGlow.png */,
 				05DCE33E19FA89870067EFBD /* OuterGlow.png */,
 				05DCE35019FA8A5F0067EFBD /* sounds */,
@@ -112,6 +116,7 @@
 				05DCE31B19F9A80F0067EFBD /* Images.xcassets */,
 				05DCE31D19F9A80F0067EFBD /* LaunchScreen.xib */,
 				05DCE30E19F9A80F0067EFBD /* Supporting Files */,
+				051E520A19FBB43600AAD15E /* OcuCam-Bridging-Header.h */,
 			);
 			path = OcuCam;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				05DCE31119F9A80F0067EFBD /* main.m in Sources */,
 				05DCE34619FA89880067EFBD /* EVILLayer.m in Sources */,
 				05DCE34719FA89880067EFBD /* EVILViewController.m in Sources */,
+				051E520C19FBB43700AAD15E /* OcuHUDLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,9 +379,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = OcuCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OcuCam/OcuCam-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -383,9 +392,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = OcuCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "OcuCam/OcuCam-Bridging-Header.h";
 			};
 			name = Release;
 		};
