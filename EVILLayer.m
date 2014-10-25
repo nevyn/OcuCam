@@ -89,8 +89,10 @@
 	point.y = _innerGlow.frame.size.height/2;
 	point.x = newX - _innerGlow.frame.origin.x;
 	_innerImage.position = point;
-    [_innerImage addAnimation:anim forKey:@"sweep"];
-	
+	if(animated)
+		[_innerImage addAnimation:anim forKey:@"sweep"];
+	else
+		[_innerImage removeAnimationForKey:@"sweep"];
 	
 	point = [(CALayer*)_outerGlow.presentationLayer position];
     anim.fromValue = @(point.x);
@@ -99,7 +101,10 @@
 	point.y = self.frame.size.height/2;
 	point.x = newX;
 	_outerGlow.position = point;
-    [_outerGlow addAnimation:anim forKey:@"sweep"];
+	if(animated)
+		[_outerGlow addAnimation:anim forKey:@"sweep"];
+	else
+		[_outerGlow removeAnimationForKey:@"sweep"];
 }
 
 - (void)animateEye
