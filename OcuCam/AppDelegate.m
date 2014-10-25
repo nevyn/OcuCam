@@ -105,12 +105,14 @@
 		if(controller.playerIndex == GCControllerPlayerIndexUnset)
 			controller.playerIndex = i++;
 		
+		__block float oldX = 0;
 		controller.extendedGamepad.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue) {
-			if(yValue > -0.05 && yValue < 0.05) {
+			if(yValue > -0.05 && yValue < 0.05 && xValue > -0.05 && xValue < 0.05) {
 				[self.foo.evil performSelector:@selector(animateEye) withObject:nil afterDelay:1];
-			} else {
+			} else /*if(fabs(xValue - oldX) > 0.1 )*/ {
 				[NSObject cancelPreviousPerformRequestsWithTarget:self.foo.evil selector:@selector(animateEye) object:nil];
-				[self.foo.evil moveEyeTo:((xValue*0.5)+0.5)*self.foo.evil.frame.size.width animated:NO];
+				[self.foo.evil moveEyeTo:((-xValue*0.5)+0.5)*self.foo.evil.frame.size.width animated:NO];
+				oldX = xValue;
 			}
 		};
 		controller.gamepad.buttonA.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
