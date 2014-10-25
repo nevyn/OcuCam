@@ -72,26 +72,33 @@
     [self animateEye];
 }
 
-- (void)moveEyeTo:(CGFloat)p animated:(BOOL)animated;
+- (void)moveEyeTo:(CGFloat)newX animated:(BOOL)animated;
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [_swooshTimer invalidate];
 	
-	p = MAX(120, MIN(self.frame.size.width-120, p));
-    
+	newX = MAX(120, MIN(self.frame.size.width-120, newX));
+	
+	CGPoint point = [(CALayer*)_innerImage.presentationLayer position];
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"position.x"];
-    anim.fromValue = @([(CALayer*)_innerImage.presentationLayer position].x);
-    anim.toValue = @(p - _innerGlow.frame.origin.x);
+    anim.fromValue = @(point.x);
+    anim.toValue = @(newX - _innerGlow.frame.origin.x);
     anim.duration = animated ? 0.2 : 0.01;
     anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    anim.fillMode = kCAFillModeForwards;
-    anim.removedOnCompletion = NO;
-
+	
+	point.y = _innerGlow.frame.size.height/2;
+	point.x = newX - _innerGlow.frame.origin.x;
+	_innerImage.position = point;
     [_innerImage addAnimation:anim forKey:@"sweep"];
-    
-    anim.fromValue = @([(CALayer*)_outerGlow.presentationLayer position].x);
-    anim.toValue = @(p);
-    
+	
+	
+	point = [(CALayer*)_outerGlow.presentationLayer position];
+    anim.fromValue = @(point.x);
+    anim.toValue = @(newX);
+	
+	point.y = self.frame.size.height/2;
+	point.x = newX;
+	_outerGlow.position = point;
     [_outerGlow addAnimation:anim forKey:@"sweep"];
 }
 
