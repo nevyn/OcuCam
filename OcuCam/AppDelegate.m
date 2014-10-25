@@ -113,6 +113,37 @@
 				[self.foo.evil moveEyeTo:((xValue*0.5)+0.5)*self.foo.evil.frame.size.width animated:NO];
 			}
 		};
+		controller.gamepad.buttonA.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s1:nil];
+		};
+		controller.gamepad.buttonB.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s2:nil];
+		};
+		controller.gamepad.buttonX.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s3:nil];
+		};
+		controller.gamepad.buttonY.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s4:nil];
+		};
+		controller.extendedGamepad.rightShoulder.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s5:nil];
+		};
+		
+		controller.extendedGamepad.leftTrigger.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo a:nil];
+		};
+		controller.extendedGamepad.rightTrigger.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo b:nil];
+		};
+
+
 	}
 }
 
