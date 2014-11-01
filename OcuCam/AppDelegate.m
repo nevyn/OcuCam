@@ -1,11 +1,12 @@
 #import "AppDelegate.h"
 #import "ExtVC.h"
 #import "EVILViewController.h"
+#import "TCAHPSimpleClient.h"
 
 @import AVFoundation;
 @import GameController;
 
-@interface AppDelegate ()
+@interface AppDelegate () <TCAsyncHashProtocolDelegate>
 
 @end
 
@@ -70,6 +71,7 @@
 	ExtVC *_externalVC;
 	UIWindow *_extW;
 	UIScreen *_screen;
+	TCAHPSimpleClient *_client;
 }
 
 - (Foo*)foo {
@@ -93,6 +95,9 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupControllers:) name:GCControllerDidConnectNotification object:nil];
 	[GCController startWirelessControllerDiscoveryWithCompletionHandler:nil];
 	[self setupControllers:nil];
+	
+	_client = [[TCAHPSimpleClient alloc] initConnectingToAnyHostOfType:@"_vidya._tcp" delegate:self];
+	[_client reconnect];
 	
 	return YES;
 }
@@ -150,6 +155,14 @@
 
 	}
 }
+
+-(void)protocol:(TCAsyncHashProtocol*)proto receivedHash:(NSDictionary*)hash payload:(NSData*)payload;
+{
+	NSData *data = hash[@"image"];
+	UIImage *image = [UIImage imageWithData:data];
+	[_externalVC setRemoteImage:image];
+}
+
 
 
 - (void)screensChanged:(NSNotification*)notif

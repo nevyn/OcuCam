@@ -22,6 +22,7 @@
     AVCaptureVideoPreviewLayer *_preview;
     CAReplicatorLayer *_replicator;
 	float _eyeSeparation;
+	CALayer *_remoteImageLayer;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -80,6 +81,11 @@
 	OcuHUDLayer *hud = [[OcuHUDLayer alloc] initWithFrame:r];
 	[_replicator addSublayer:hud];
 	
+	_remoteImageLayer = [[CALayer alloc] init];
+	_remoteImageLayer.frame = CGRectMake(400, 150, 120, 100);
+	_remoteImageLayer.backgroundColor = [UIColor greenColor].CGColor;
+	[_replicator addSublayer:_remoteImageLayer];
+	
 	
 	[self.view.layer addSublayer:_replicator];
 	[hud addAnimations];
@@ -111,6 +117,11 @@
 	
     [_preview removeFromSuperlayer];
 	[_captureSession stopRunning];
+}
+
+- (void)setRemoteImage:(UIImage*)image
+{
+	_remoteImageLayer.contents = (id)image.CGImage;
 }
 
 

@@ -11,4 +11,5 @@
 @interface ExtVC : UIViewController
 - (void)a;
 - (void)b;
+- (void)setRemoteImage:(UIImage*)image;
 @end

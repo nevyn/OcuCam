@@ -21,6 +21,10 @@
 		05DCE34819FA89880067EFBD /* InnerGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE33D19FA89870067EFBD /* InnerGlow.png */; };
 		05DCE34919FA89880067EFBD /* OuterGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE33E19FA89870067EFBD /* OuterGlow.png */; };
 		05DCE35119FA8A5F0067EFBD /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE35019FA8A5F0067EFBD /* sounds */; };
+		05F9620D1A0526D2008AD766 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F962061A0526D2008AD766 /* AsyncSocket.m */; };
+		05F9620E1A0526D2008AD766 /* TCAHPSimpleClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F962081A0526D2008AD766 /* TCAHPSimpleClient.m */; };
+		05F9620F1A0526D2008AD766 /* TCAHPSimpleServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F9620A1A0526D2008AD766 /* TCAHPSimpleServer.m */; };
+		05F962101A0526D2008AD766 /* TCAsyncHashProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F9620C1A0526D2008AD766 /* TCAsyncHashProtocol.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,14 @@
 		05DCE33D19FA89870067EFBD /* InnerGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InnerGlow.png; sourceTree = SOURCE_ROOT; };
 		05DCE33E19FA89870067EFBD /* OuterGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OuterGlow.png; sourceTree = SOURCE_ROOT; };
 		05DCE35019FA8A5F0067EFBD /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = "../../../Dev/halloween-cyborg/CylonicCA/sounds"; sourceTree = "<group>"; };
+		05F962051A0526D2008AD766 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = CamStream/Vendor/CocoaAsyncSocket/RunLoop/AsyncSocket.h; sourceTree = SOURCE_ROOT; };
+		05F962061A0526D2008AD766 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = CamStream/Vendor/CocoaAsyncSocket/RunLoop/AsyncSocket.m; sourceTree = SOURCE_ROOT; };
+		05F962071A0526D2008AD766 /* TCAHPSimpleClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCAHPSimpleClient.h; path = CamStream/Vendor/TCAsyncHashProtocol/TCAHPSimpleClient.h; sourceTree = SOURCE_ROOT; };
+		05F962081A0526D2008AD766 /* TCAHPSimpleClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCAHPSimpleClient.m; path = CamStream/Vendor/TCAsyncHashProtocol/TCAHPSimpleClient.m; sourceTree = SOURCE_ROOT; };
+		05F962091A0526D2008AD766 /* TCAHPSimpleServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCAHPSimpleServer.h; path = CamStream/Vendor/TCAsyncHashProtocol/TCAHPSimpleServer.h; sourceTree = SOURCE_ROOT; };
+		05F9620A1A0526D2008AD766 /* TCAHPSimpleServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCAHPSimpleServer.m; path = CamStream/Vendor/TCAsyncHashProtocol/TCAHPSimpleServer.m; sourceTree = SOURCE_ROOT; };
+		05F9620B1A0526D2008AD766 /* TCAsyncHashProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCAsyncHashProtocol.h; path = CamStream/Vendor/TCAsyncHashProtocol/TCAsyncHashProtocol.h; sourceTree = SOURCE_ROOT; };
+		05F9620C1A0526D2008AD766 /* TCAsyncHashProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCAsyncHashProtocol.m; path = CamStream/Vendor/TCAsyncHashProtocol/TCAsyncHashProtocol.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +123,14 @@
 				051E520B19FBB43700AAD15E /* OcuHUDLayer.swift */,
 				05DCE33D19FA89870067EFBD /* InnerGlow.png */,
 				05DCE33E19FA89870067EFBD /* OuterGlow.png */,
+				05F962051A0526D2008AD766 /* AsyncSocket.h */,
+				05F962061A0526D2008AD766 /* AsyncSocket.m */,
+				05F962071A0526D2008AD766 /* TCAHPSimpleClient.h */,
+				05F962081A0526D2008AD766 /* TCAHPSimpleClient.m */,
+				05F962091A0526D2008AD766 /* TCAHPSimpleServer.h */,
+				05F9620A1A0526D2008AD766 /* TCAHPSimpleServer.m */,
+				05F9620B1A0526D2008AD766 /* TCAsyncHashProtocol.h */,
+				05F9620C1A0526D2008AD766 /* TCAsyncHashProtocol.m */,
 				05DCE35019FA8A5F0067EFBD /* sounds */,
 				05DCE31819F9A80F0067EFBD /* Main.storyboard */,
 				05DCE31B19F9A80F0067EFBD /* Images.xcassets */,
@@ -253,9 +273,13 @@
 				05DCE33619FA49BC0067EFBD /* ExtVC.m in Sources */,
 				05DCE31419F9A80F0067EFBD /* AppDelegate.m in Sources */,
 				05DCE31119F9A80F0067EFBD /* main.m in Sources */,
+				05F962101A0526D2008AD766 /* TCAsyncHashProtocol.m in Sources */,
 				05DCE34619FA89880067EFBD /* EVILLayer.m in Sources */,
 				05DCE34719FA89880067EFBD /* EVILViewController.m in Sources */,
 				051E520C19FBB43700AAD15E /* OcuHUDLayer.swift in Sources */,
+				05F9620D1A0526D2008AD766 /* AsyncSocket.m in Sources */,
+				05F9620E1A0526D2008AD766 /* TCAHPSimpleClient.m in Sources */,
+				05F9620F1A0526D2008AD766 /* TCAHPSimpleServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
