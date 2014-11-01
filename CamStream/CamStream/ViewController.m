@@ -19,6 +19,25 @@
 
 @implementation ViewController
 
+- (IBAction)playSound:(id)sender
+{
+	[_server broadcast:@{
+		@"command": @"playSound",
+		@"soundId": @([sender tag]),
+	}];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[_server broadcast:@{
+		@"command": @"displayMessage",
+		@"message": [textField text],
+	}];
+	textField.text = @"";
+	[textField resignFirstResponder];
+	return NO;
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
@@ -59,6 +78,10 @@
 
 	
 	CGRect r = self.view.bounds;
+	r.origin.x = r.size.width - 100;
+	r.size.width = 100;
+	r.origin.y = r.size.height - 100;
+	r.size.height = 100;
 	
 	if(_videoInput) {
 		// 4. Configure

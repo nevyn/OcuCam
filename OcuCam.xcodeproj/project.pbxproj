@@ -35,6 +35,34 @@
 			remoteGlobalIDString = 05DCE30A19F9A80F0067EFBD;
 			remoteInfo = OcuCam;
 		};
+		05F9621B1A0529FF008AD766 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05F962141A0529FF008AD766 /* CamStream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05A663921A0027C300422D78;
+			remoteInfo = CamStream;
+		};
+		05F9621D1A0529FF008AD766 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05F962141A0529FF008AD766 /* CamStream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05A663AB1A0027C300422D78;
+			remoteInfo = CamStreamTests;
+		};
+		05F9621F1A0529FF008AD766 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05F962141A0529FF008AD766 /* CamStream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05A663CF1A00397100422D78;
+			remoteInfo = CamRemoteViewer;
+		};
+		05F962211A0529FF008AD766 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05F962141A0529FF008AD766 /* CamStream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05A663E71A00397100422D78;
+			remoteInfo = CamRemoteViewerTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +97,7 @@
 		05F9620A1A0526D2008AD766 /* TCAHPSimpleServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCAHPSimpleServer.m; path = CamStream/Vendor/TCAsyncHashProtocol/TCAHPSimpleServer.m; sourceTree = SOURCE_ROOT; };
 		05F9620B1A0526D2008AD766 /* TCAsyncHashProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCAsyncHashProtocol.h; path = CamStream/Vendor/TCAsyncHashProtocol/TCAsyncHashProtocol.h; sourceTree = SOURCE_ROOT; };
 		05F9620C1A0526D2008AD766 /* TCAsyncHashProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCAsyncHashProtocol.m; path = CamStream/Vendor/TCAsyncHashProtocol/TCAsyncHashProtocol.m; sourceTree = SOURCE_ROOT; };
+		05F962141A0529FF008AD766 /* CamStream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CamStream.xcodeproj; path = CamStream/CamStream.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +126,7 @@
 				05DCE30D19F9A80F0067EFBD /* OcuCam */,
 				05DCE32719F9A80F0067EFBD /* OcuCamTests */,
 				05DCE30C19F9A80F0067EFBD /* Products */,
+				05F962141A0529FF008AD766 /* CamStream.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +197,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		05F962151A0529FF008AD766 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05F9621C1A0529FF008AD766 /* CamStream.app */,
+				05F9621E1A0529FF008AD766 /* CamStreamTests.xctest */,
+				05F962201A0529FF008AD766 /* CamRemoteViewer.app */,
+				05F962221A0529FF008AD766 /* CamRemoteViewerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -234,6 +275,12 @@
 			mainGroup = 05DCE30219F9A80F0067EFBD;
 			productRefGroup = 05DCE30C19F9A80F0067EFBD /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 05F962151A0529FF008AD766 /* Products */;
+					ProjectRef = 05F962141A0529FF008AD766 /* CamStream.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				05DCE30A19F9A80F0067EFBD /* OcuCam */,
@@ -241,6 +288,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		05F9621C1A0529FF008AD766 /* CamStream.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = CamStream.app;
+			remoteRef = 05F9621B1A0529FF008AD766 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05F9621E1A0529FF008AD766 /* CamStreamTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CamStreamTests.xctest;
+			remoteRef = 05F9621D1A0529FF008AD766 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05F962201A0529FF008AD766 /* CamRemoteViewer.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = CamRemoteViewer.app;
+			remoteRef = 05F9621F1A0529FF008AD766 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05F962221A0529FF008AD766 /* CamRemoteViewerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CamRemoteViewerTests.xctest;
+			remoteRef = 05F962211A0529FF008AD766 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		05DCE30919F9A80F0067EFBD /* Resources */ = {

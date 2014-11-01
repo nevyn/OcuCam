@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		059528001A052E0F0024CED6 /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 059527FF1A052E0F0024CED6 /* Main2.storyboard */; };
 		05A663981A0027C300422D78 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663971A0027C300422D78 /* main.m */; };
 		05A6639B1A0027C300422D78 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A6639A1A0027C300422D78 /* AppDelegate.m */; };
 		05A6639E1A0027C300422D78 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A6639D1A0027C300422D78 /* ViewController.m */; };
-		05A663A11A0027C300422D78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05A6639F1A0027C300422D78 /* Main.storyboard */; };
 		05A663A31A0027C300422D78 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A663A21A0027C300422D78 /* Images.xcassets */; };
 		05A663A61A0027C300422D78 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05A663A41A0027C300422D78 /* LaunchScreen.xib */; };
-		05A663B21A0027C300422D78 /* CamStreamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663B11A0027C300422D78 /* CamStreamTests.m */; };
 		05A663C31A0035BA00422D78 /* TCAHPSimpleServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663C01A0035BA00422D78 /* TCAHPSimpleServer.m */; };
 		05A663C41A0035BA00422D78 /* TCAsyncHashProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663C21A0035BA00422D78 /* TCAsyncHashProtocol.m */; };
 		05A663CA1A0035DD00422D78 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663C91A0035DD00422D78 /* AsyncSocket.m */; };
@@ -23,31 +22,14 @@
 		05A663DD1A00397100422D78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05A663DB1A00397100422D78 /* Main.storyboard */; };
 		05A663DF1A00397100422D78 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A663DE1A00397100422D78 /* Images.xcassets */; };
 		05A663E21A00397100422D78 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05A663E01A00397100422D78 /* LaunchScreen.xib */; };
-		05A663EE1A00397100422D78 /* CamRemoteViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663ED1A00397100422D78 /* CamRemoteViewerTests.m */; };
 		05A663FB1A0039C200422D78 /* TCAHPSimpleClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663F61A0039C200422D78 /* TCAHPSimpleClient.m */; };
 		05A663FC1A0039C200422D78 /* TCAHPSimpleServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663F81A0039C200422D78 /* TCAHPSimpleServer.m */; };
 		05A663FD1A0039C200422D78 /* TCAsyncHashProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663FA1A0039C200422D78 /* TCAsyncHashProtocol.m */; };
 		05A664001A0039CA00422D78 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A663FF1A0039CA00422D78 /* AsyncSocket.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		05A663AC1A0027C300422D78 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05A6638A1A0027C300422D78 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 05A663911A0027C300422D78;
-			remoteInfo = CamStream;
-		};
-		05A663E81A00397100422D78 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05A6638A1A0027C300422D78 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 05A663CE1A00397100422D78;
-			remoteInfo = CamRemoteViewer;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		059527FF1A052E0F0024CED6 /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		05A663921A0027C300422D78 /* CamStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CamStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A663961A0027C300422D78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A663971A0027C300422D78 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -55,10 +37,8 @@
 		05A6639A1A0027C300422D78 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		05A6639C1A0027C300422D78 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		05A6639D1A0027C300422D78 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		05A663A01A0027C300422D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		05A663A21A0027C300422D78 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		05A663A51A0027C300422D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		05A663AB1A0027C300422D78 /* CamStreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CamStreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A663B01A0027C300422D78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A663B11A0027C300422D78 /* CamStreamTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CamStreamTests.m; sourceTree = "<group>"; };
 		05A663BF1A0035BA00422D78 /* TCAHPSimpleServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCAHPSimpleServer.h; path = Vendor/TCAsyncHashProtocol/TCAHPSimpleServer.h; sourceTree = SOURCE_ROOT; };
@@ -77,7 +57,6 @@
 		05A663DC1A00397100422D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		05A663DE1A00397100422D78 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		05A663E11A00397100422D78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		05A663E71A00397100422D78 /* CamRemoteViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CamRemoteViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A663EC1A00397100422D78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A663ED1A00397100422D78 /* CamRemoteViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CamRemoteViewerTests.m; sourceTree = "<group>"; };
 		05A663F51A0039C200422D78 /* TCAHPSimpleClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCAHPSimpleClient.h; path = Vendor/TCAsyncHashProtocol/TCAHPSimpleClient.h; sourceTree = SOURCE_ROOT; };
@@ -98,21 +77,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		05A663A81A0027C300422D78 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		05A663CC1A00397100422D78 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		05A663E41A00397100422D78 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,9 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				05A663921A0027C300422D78 /* CamStream.app */,
-				05A663AB1A0027C300422D78 /* CamStreamTests.xctest */,
 				05A663CF1A00397100422D78 /* CamRemoteViewer.app */,
-				05A663E71A00397100422D78 /* CamRemoteViewerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,7 +114,7 @@
 				05A6639A1A0027C300422D78 /* AppDelegate.m */,
 				05A6639C1A0027C300422D78 /* ViewController.h */,
 				05A6639D1A0027C300422D78 /* ViewController.m */,
-				05A6639F1A0027C300422D78 /* Main.storyboard */,
+				059527FF1A052E0F0024CED6 /* Main2.storyboard */,
 				05A663A21A0027C300422D78 /* Images.xcassets */,
 				05A663A41A0027C300422D78 /* LaunchScreen.xib */,
 				05A663BF1A0035BA00422D78 /* TCAHPSimpleServer.h */,
@@ -260,24 +223,6 @@
 			productReference = 05A663921A0027C300422D78 /* CamStream.app */;
 			productType = "com.apple.product-type.application";
 		};
-		05A663AA1A0027C300422D78 /* CamStreamTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 05A663B81A0027C300422D78 /* Build configuration list for PBXNativeTarget "CamStreamTests" */;
-			buildPhases = (
-				05A663A71A0027C300422D78 /* Sources */,
-				05A663A81A0027C300422D78 /* Frameworks */,
-				05A663A91A0027C300422D78 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				05A663AD1A0027C300422D78 /* PBXTargetDependency */,
-			);
-			name = CamStreamTests;
-			productName = CamStreamTests;
-			productReference = 05A663AB1A0027C300422D78 /* CamStreamTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		05A663CE1A00397100422D78 /* CamRemoteViewer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05A663EF1A00397100422D78 /* Build configuration list for PBXNativeTarget "CamRemoteViewer" */;
@@ -295,24 +240,6 @@
 			productReference = 05A663CF1A00397100422D78 /* CamRemoteViewer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		05A663E61A00397100422D78 /* CamRemoteViewerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 05A663F21A00397100422D78 /* Build configuration list for PBXNativeTarget "CamRemoteViewerTests" */;
-			buildPhases = (
-				05A663E31A00397100422D78 /* Sources */,
-				05A663E41A00397100422D78 /* Frameworks */,
-				05A663E51A00397100422D78 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				05A663E91A00397100422D78 /* PBXTargetDependency */,
-			);
-			name = CamRemoteViewerTests;
-			productName = CamRemoteViewerTests;
-			productReference = 05A663E71A00397100422D78 /* CamRemoteViewerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -324,17 +251,10 @@
 				TargetAttributes = {
 					05A663911A0027C300422D78 = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					05A663AA1A0027C300422D78 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 05A663911A0027C300422D78;
+						DevelopmentTeam = M4Q2TE45WT;
 					};
 					05A663CE1A00397100422D78 = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					05A663E61A00397100422D78 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = 05A663CE1A00397100422D78;
 					};
 				};
 			};
@@ -352,9 +272,7 @@
 			projectRoot = "";
 			targets = (
 				05A663911A0027C300422D78 /* CamStream */,
-				05A663AA1A0027C300422D78 /* CamStreamTests */,
 				05A663CE1A00397100422D78 /* CamRemoteViewer */,
-				05A663E61A00397100422D78 /* CamRemoteViewerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -364,16 +282,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05A663A11A0027C300422D78 /* Main.storyboard in Resources */,
 				05A663A61A0027C300422D78 /* LaunchScreen.xib in Resources */,
+				059528001A052E0F0024CED6 /* Main2.storyboard in Resources */,
 				05A663A31A0027C300422D78 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		05A663A91A0027C300422D78 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,13 +295,6 @@
 				05A663DD1A00397100422D78 /* Main.storyboard in Resources */,
 				05A663E21A00397100422D78 /* LaunchScreen.xib in Resources */,
 				05A663DF1A00397100422D78 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		05A663E51A00397100422D78 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,14 +314,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		05A663A71A0027C300422D78 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05A663B21A0027C300422D78 /* CamStreamTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		05A663CB1A00397100422D78 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,38 +328,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		05A663E31A00397100422D78 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05A663EE1A00397100422D78 /* CamRemoteViewerTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		05A663AD1A0027C300422D78 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 05A663911A0027C300422D78 /* CamStream */;
-			targetProxy = 05A663AC1A0027C300422D78 /* PBXContainerItemProxy */;
-		};
-		05A663E91A00397100422D78 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 05A663CE1A00397100422D78 /* CamRemoteViewer */;
-			targetProxy = 05A663E81A00397100422D78 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		05A6639F1A0027C300422D78 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				05A663A01A0027C300422D78 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		05A663A41A0027C300422D78 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -573,10 +440,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CamStream/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -584,44 +454,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CamStream/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		05A663B91A0027C300422D78 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CamStreamTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CamStream.app/CamStream";
-			};
-			name = Debug;
-		};
-		05A663BA1A0027C300422D78 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CamStreamTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CamStream.app/CamStream";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -649,40 +488,6 @@
 			};
 			name = Release;
 		};
-		05A663F31A00397100422D78 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CamRemoteViewerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CamRemoteViewer.app/CamRemoteViewer";
-			};
-			name = Debug;
-		};
-		05A663F41A00397100422D78 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CamRemoteViewerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CamRemoteViewer.app/CamRemoteViewer";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -702,14 +507,7 @@
 				05A663B71A0027C300422D78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		05A663B81A0027C300422D78 /* Build configuration list for PBXNativeTarget "CamStreamTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				05A663B91A0027C300422D78 /* Debug */,
-				05A663BA1A0027C300422D78 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		05A663EF1A00397100422D78 /* Build configuration list for PBXNativeTarget "CamRemoteViewer" */ = {
 			isa = XCConfigurationList;
@@ -718,14 +516,7 @@
 				05A663F11A00397100422D78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		05A663F21A00397100422D78 /* Build configuration list for PBXNativeTarget "CamRemoteViewerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				05A663F31A00397100422D78 /* Debug */,
-				05A663F41A00397100422D78 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
