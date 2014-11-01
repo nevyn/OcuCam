@@ -23,6 +23,7 @@
     CAReplicatorLayer *_replicator;
 	float _eyeSeparation;
 	CALayer *_remoteImageLayer;
+	CATextLayer *_text;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -86,6 +87,16 @@
 	_remoteImageLayer.backgroundColor = [UIColor greenColor].CGColor;
 	[_replicator addSublayer:_remoteImageLayer];
 	
+	_text = [[CATextLayer alloc] init];
+	_text.fontSize = 24;
+	CGFontRef font = CGFontCreateWithFontName((CFStringRef)@"HelveticaNeue-Regular");
+	_text.font = font;
+	_text.string = @"hello";
+	_text.frame = CGRectMake(self.view.frame.size.width/4, self.view.frame.size.height/2, 100, 100);
+	_text.foregroundColor = [UIColor whiteColor].CGColor;
+	[_text display];
+	[_replicator addSublayer:_text];
+	
 	
 	[self.view.layer addSublayer:_replicator];
 	[hud addAnimations];
@@ -122,6 +133,11 @@
 - (void)setRemoteImage:(UIImage*)image
 {
 	_remoteImageLayer.contents = (id)image.CGImage;
+}
+
+- (void)addMessage:(NSString*)message
+{
+	_text.string = message;
 }
 
 

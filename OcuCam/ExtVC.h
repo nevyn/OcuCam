@@ -12,4 +12,5 @@
 - (void)a;
 - (void)b;
 - (void)setRemoteImage:(UIImage*)image;
+- (void)addMessage:(NSString*)message;
 @end

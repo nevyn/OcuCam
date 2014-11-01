@@ -1,9 +1,163 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qdi-yV-Wb4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="sgc-3V-xE0">
+            <objects>
+                <viewController id="Qdi-yV-Wb4" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aTd-OO-NCF"/>
+                        <viewControllerLayoutGuide type="bottom" id="sA2-fk-GJW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8fK-h9-h4n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7k4-5y-Wkd">
+                                <rect key="frame" x="-8" y="55" width="320" height="259"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <string key="text">
+- (void)connectToNetService:(NSNetService*)aNetService
+{
+    NSLog(@"Attempting connection to %@", aNetService);
+    
+    NSError *err;
+    _connectingSocket = [[AsyncSocket alloc] initWithDelegate:self];
+    for(NSData *address in aNetService.addresses)
+        if(![_connectingSocket connectToAddress:address error:&amp;err])
+            NSLog(@"Failed connection to %@: %@", aNetService, err);
+        else
+            return;
+	
+	NSLog(@"Failed to connect, starting retry");
+	[self startReconnecting];
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
+{
+    NSLog(@"Attempting resolution of %@", aNetService);
+    [_pendingResolve addObject:aNetService];
+    aNetService.delegate = self;
+    [aNetService resolveWithTimeout:5];
+}
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
+{
+	NSLog(@"Lost service %@", aNetService);
+    [_pendingResolve removeObject:aNetService];
+    [_resolved removeObject:aNetService];
+}
+
+- (void)netServiceDidResolveAddress:(NSNetService *)aNetService
+{
+	NSLog(@"Did resolve %@", aNetService);
+    [_resolved addObject:aNetService];
+    [_pendingResolve removeObject:aNetService];
+    
+    if (_proto || _connectingSocket)
+        return;
+    
+    [self connectToNetService:aNetService];
+}
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict;
+{
+    NSLog(@"Failed to resolve %@: %@", sender, errorDict);
+    [_pendingResolve removeObject:sender];
+}
+</string>
+                                <color key="textColor" red="0.69803148510000002" green="1" blue="0.26847600939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="9"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button appearanceType="aqua" opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Etq-t2-z18">
+                                <rect key="frame" x="-3" y="313" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                <state key="normal" title="Play A">
+                                    <color key="titleColor" red="0.58431375029999999" green="0.77254909279999995" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSound:" destination="Qdi-yV-Wb4" eventType="touchUpInside" id="JU5-7n-tuz"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYf-MF-PQg">
+                                <rect key="frame" x="62" y="313" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                <state key="normal" title="Play B">
+                                    <color key="titleColor" red="0.58431375029999999" green="0.77254909279999995" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSound:" destination="Qdi-yV-Wb4" eventType="touchUpInside" id="3nD-co-aoh"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCZ-jn-gXI">
+                                <rect key="frame" x="125" y="313" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                <state key="normal" title="Play C">
+                                    <color key="titleColor" red="0.58431375029999999" green="0.77254909279999995" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSound:" destination="Qdi-yV-Wb4" eventType="touchUpInside" id="CYa-ec-VGU"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6dw-JB-GFp">
+                                <rect key="frame" x="192" y="313" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                <state key="normal" title="Play D">
+                                    <color key="titleColor" red="0.58431375029999999" green="0.77254909279999995" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSound:" destination="Qdi-yV-Wb4" eventType="touchUpInside" id="csz-fF-3RD"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9W8-rT-jXk">
+                                <rect key="frame" x="260" y="313" width="66" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                <state key="normal" title="Play E">
+                                    <color key="titleColor" red="0.58431375029999999" green="0.77254909279999995" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSound:" destination="Qdi-yV-Wb4" eventType="touchUpInside" id="ROQ-fv-33z"/>
+                                </connections>
+                            </button>
+                            <textField appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="cmd" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Edd-BC-H9z">
+                                <rect key="frame" x="20" y="22" width="276" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.58431375029999999" green="0.77254909279999995" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Qdi-yV-Wb4" id="aro-n4-vEc"/>
+                                </connections>
+                            </textField>
+                            <label appearanceType="aqua" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TW7-3z-02F">
+                                <rect key="frame" x="-1" y="26" width="11" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="esi-gm-zYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="104" y="-121"/>
+        </scene>
+    </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

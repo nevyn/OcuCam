@@ -159,8 +159,19 @@
 -(void)protocol:(TCAsyncHashProtocol*)proto receivedHash:(NSDictionary*)hash payload:(NSData*)payload;
 {
 	NSData *data = hash[@"image"];
-	UIImage *image = [UIImage imageWithData:data];
-	[_externalVC setRemoteImage:image];
+	if(data) {
+		UIImage *image = [UIImage imageWithData:data];
+		[_externalVC setRemoteImage:image];
+		return;
+	}
+	NSString *cmd = hash[@"command"];
+	NSLog(@"Command: %@", hash);
+	if([cmd isEqualToString:@"playSound"]) {
+		NSString *sel = [NSString stringWithFormat:@"s%@:", hash[@"soundId"]];
+		[[self foo] performSelector:NSSelectorFromString(sel) withObject:nil];
+	} else if([cmd isEqualToString:@"displayMessage"]) {
+		[_externalVC addMessage:hash[@"message"]];
+	}
 }
 
 
