@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ExtVC : UIViewController
+- (void)setString:(NSString*)string forKey:(NSString*)key;
 - (void)a;
 - (void)b;
 - (void)setRemoteImage:(UIImage*)image;

@@ -2,6 +2,7 @@
 #import "ExtVC.h"
 #import "EVILViewController.h"
 #import "TCAHPSimpleClient.h"
+#import "EVILViewController2.h"
 
 @import AVFoundation;
 @import GameController;
@@ -104,6 +105,7 @@
 
 - (void)setupControllers:(NSNotification*)notif
 {
+	[_externalVC setString:[@([GCController controllers].count) description] forKey:@"NUMCTRL"];
 	int i = 0;
 	for(GCController *controller in [GCController controllers]) {
 		NSLog(@"Connecting controller %@", controller);
@@ -114,11 +116,14 @@
 		controller.extendedGamepad.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue) {
 			if(yValue > -0.05 && yValue < 0.05 && xValue > -0.05 && xValue < 0.05) {
 				[self.foo performSelector:@selector(animateEye) withObject:nil afterDelay:1];
+				[_externalVC setString:@"><" forKey:@"CTRL"];
 				NSLog(@"Stopping controller");
 			} else if(fabs(xValue - oldX) > 0.1 ) {
 				NSLog(@"Changing value to %f", xValue);
+				float v = ((-xValue*0.5)+0.5);
+				[_externalVC setString:[NSString stringWithFormat:@"%.02f", v] forKey:@"CTRL"];
+				[self.foo moveEyeTo:v animated:NO];
 				[NSObject cancelPreviousPerformRequestsWithTarget:self.foo selector:@selector(animateEye) object:nil];
-				[self.foo moveEyeTo:((-xValue*0.5)+0.5) animated:NO];
 				oldX = xValue;
 			}
 		};
@@ -181,6 +186,7 @@
 	UITextView *text = [(Foo*)[[[UIApplication sharedApplication] keyWindow] rootViewController] text];
 
 	NSArray *screens = [UIScreen screens];
+	[_externalVC setString:[@([UIScreen screens].count) description] forKey:@"NUMSCR"];
 	if(screens.count == 1) {
 		_externalVC = nil;
 		_extW.hidden = YES;

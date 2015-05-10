@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		051E520C19FBB43700AAD15E /* OcuHUDLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E520B19FBB43700AAD15E /* OcuHUDLayer.swift */; };
+		053493A11AFF2DA200F3A0DE /* EVILViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 053493A01AFF2DA200F3A0DE /* EVILViewController2.m */; };
 		05DCE31119F9A80F0067EFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE31019F9A80F0067EFBD /* main.m */; };
 		05DCE31419F9A80F0067EFBD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCE31319F9A80F0067EFBD /* AppDelegate.m */; };
 		05DCE31A19F9A80F0067EFBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05DCE31819F9A80F0067EFBD /* Main.storyboard */; };
@@ -54,6 +55,8 @@
 /* Begin PBXFileReference section */
 		051E520A19FBB43600AAD15E /* OcuCam-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OcuCam-Bridging-Header.h"; sourceTree = "<group>"; };
 		051E520B19FBB43700AAD15E /* OcuHUDLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OcuHUDLayer.swift; sourceTree = "<group>"; };
+		0534939F1AFF2DA200F3A0DE /* EVILViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVILViewController2.h; sourceTree = "<group>"; };
+		053493A01AFF2DA200F3A0DE /* EVILViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVILViewController2.m; sourceTree = "<group>"; };
 		05DCE30B19F9A80F0067EFBD /* OcuCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OcuCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DCE30F19F9A80F0067EFBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DCE31019F9A80F0067EFBD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 				05DCE33A19FA89870067EFBD /* EVILLayer.m */,
 				05DCE33B19FA89870067EFBD /* EVILViewController.h */,
 				05DCE33C19FA89870067EFBD /* EVILViewController.m */,
+				0534939F1AFF2DA200F3A0DE /* EVILViewController2.h */,
+				053493A01AFF2DA200F3A0DE /* EVILViewController2.m */,
 				051E520B19FBB43700AAD15E /* OcuHUDLayer.swift */,
 				05DCE33D19FA89870067EFBD /* InnerGlow.png */,
 				05DCE33E19FA89870067EFBD /* OuterGlow.png */,
@@ -328,6 +333,7 @@
 				051E520C19FBB43700AAD15E /* OcuHUDLayer.swift in Sources */,
 				05F9620D1A0526D2008AD766 /* AsyncSocket.m in Sources */,
 				05F9620E1A0526D2008AD766 /* TCAHPSimpleClient.m in Sources */,
+				053493A11AFF2DA200F3A0DE /* EVILViewController2.m in Sources */,
 				05F9620F1A0526D2008AD766 /* TCAHPSimpleServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

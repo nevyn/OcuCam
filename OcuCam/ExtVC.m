@@ -24,6 +24,18 @@
 	float _eyeSeparation;
 	CALayer *_remoteImageLayer;
 	CATextLayer *_text;
+	CATextLayer *_infoText;
+	NSMutableDictionary *_infos;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	if(!(self = [super initWithCoder:aDecoder]))
+		return nil;
+	
+	_infos = [NSMutableDictionary new];
+	
+	return self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -97,9 +109,31 @@
 	[_text display];
 	[_replicator addSublayer:_text];
 	
+	_infoText = [[CATextLayer alloc] init];
+	_infoText.fontSize = 18;
+	CGFontRef font2 = CGFontCreateWithFontName((CFStringRef)@"Courier New");
+	_infoText.font = font2;
+	_infoText.string = @"##";
+	_infoText.frame = CGRectMake(self.view.frame.size.width/10, self.view.frame.size.height/4, self.view.frame.size.width, self.view.frame.size.height);
+	_infoText.foregroundColor = [UIColor whiteColor].CGColor;
+	[_replicator addSublayer:_infoText];
+	
+	[self setString:@"##" forKey:@"CD"];
+	
 	
 	[self.view.layer addSublayer:_replicator];
 	[hud addAnimations];
+}
+
+- (void)setString:(NSString*)string forKey:(NSString*)key
+{
+	_infos[key] = string;
+	NSMutableString *str = [NSMutableString new];
+	for(NSString *key in _infos.allKeys) {
+		[str appendFormat:@"%@: %@\n", key, _infos[key]];
+	}
+	_infoText.string = str;
+	[_infoText display];
 }
 
 - (void)a
@@ -119,6 +153,7 @@
 	CGRect r = self.view.bounds;
 	r.size.width /= 2;
 	_replicator.instanceTransform = CATransform3DMakeTranslation(r.size.width + _eyeSeparation, 0, 0.0);
+	[self setString:[@(_eyeSeparation) description] forKey:@"EYESEP"];
 	NSLog(@"Separation: %f", _eyeSeparation);
 }
 
