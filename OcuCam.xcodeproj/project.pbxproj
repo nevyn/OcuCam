@@ -42,26 +42,12 @@
 			remoteGlobalIDString = 05A663921A0027C300422D78;
 			remoteInfo = CamStream;
 		};
-		05F9621D1A0529FF008AD766 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05F962141A0529FF008AD766 /* CamStream.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05A663AB1A0027C300422D78;
-			remoteInfo = CamStreamTests;
-		};
 		05F9621F1A0529FF008AD766 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 05F962141A0529FF008AD766 /* CamStream.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 05A663CF1A00397100422D78;
 			remoteInfo = CamRemoteViewer;
-		};
-		05F962211A0529FF008AD766 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05F962141A0529FF008AD766 /* CamStream.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05A663E71A00397100422D78;
-			remoteInfo = CamRemoteViewerTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -201,9 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				05F9621C1A0529FF008AD766 /* CamStream.app */,
-				05F9621E1A0529FF008AD766 /* CamStreamTests.xctest */,
 				05F962201A0529FF008AD766 /* CamRemoteViewer.app */,
-				05F962221A0529FF008AD766 /* CamRemoteViewerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,6 +241,7 @@
 				TargetAttributes = {
 					05DCE30A19F9A80F0067EFBD = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = M4Q2TE45WT;
 					};
 					05DCE32319F9A80F0067EFBD = {
 						CreatedOnToolsVersion = 6.1;
@@ -297,25 +282,11 @@
 			remoteRef = 05F9621B1A0529FF008AD766 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		05F9621E1A0529FF008AD766 /* CamStreamTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CamStreamTests.xctest;
-			remoteRef = 05F9621D1A0529FF008AD766 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		05F962201A0529FF008AD766 /* CamRemoteViewer.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = CamRemoteViewer.app;
 			remoteRef = 05F9621F1A0529FF008AD766 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		05F962221A0529FF008AD766 /* CamRemoteViewerTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CamRemoteViewerTests.xctest;
-			remoteRef = 05F962211A0529FF008AD766 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -482,9 +453,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OcuCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OcuCam/OcuCam-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -495,9 +469,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OcuCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OcuCam/OcuCam-Bridging-Header.h";
 			};
 			name = Release;

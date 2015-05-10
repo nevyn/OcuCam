@@ -8,9 +8,19 @@
 
 #import "EVILViewController.h"
 
+@interface EVILViewController ()
+@property(nonatomic) EVILLayer *evil;
+@end
 
 @implementation EVILViewController
-
+- (void)moveEyeTo:(CGFloat)p animated:(BOOL)animated
+{
+	[self.evil moveEyeTo:p*self.evil.frame.size.width animated:animated];
+}
+- (void)animateEye
+{
+	[self.evil animateEye];
+}
 - (BOOL)prefersStatusBarHidden
 {
     return YES;

@@ -68,7 +68,7 @@
 		
 		_preview = [AVCaptureVideoPreviewLayer layerWithSession:_captureSession];
 		_preview.frame = r;
-		_preview.orientation = AVCaptureVideoOrientationLandscapeLeft;
+		_preview.orientation = [UIApplication sharedApplication].statusBarOrientation;
 		_preview.automaticallyAdjustsMirroring = NO;
 		_preview.mirrored = NO;
 	}

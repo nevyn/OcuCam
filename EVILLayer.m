@@ -24,7 +24,7 @@
     if(!(self = [super init]))
         return nil;
     
-    _swoosh = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/eye" withExtension:@"wav"]];
+    //_swoosh = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/eye" withExtension:@"wav"]];
     
     [self performSelector:@selector(setup) withObject:nil afterDelay:0];
     
@@ -77,7 +77,7 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [_swooshTimer invalidate];
 	
-	newX = MAX(120, MIN(self.frame.size.width-120, newX));
+	newX = MAX(140, MIN(self.frame.size.width-120, newX));
 	
 	CGPoint point = [(CALayer*)_innerImage.presentationLayer position];
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"position.x"];
@@ -109,7 +109,7 @@
 
 - (void)animateEye
 {
-    [self moveEyeTo:120 animated:YES];
+    [self moveEyeTo:140 animated:YES];
     [self performSelector:@selector(animateEye2) withObject:Nil afterDelay:0.2];
 }
 

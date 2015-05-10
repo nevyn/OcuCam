@@ -113,12 +113,12 @@
 		__block float oldX = 0;
 		controller.extendedGamepad.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue) {
 			if(yValue > -0.05 && yValue < 0.05 && xValue > -0.05 && xValue < 0.05) {
-				[self.foo.evil performSelector:@selector(animateEye) withObject:nil afterDelay:1];
+				[self.foo performSelector:@selector(animateEye) withObject:nil afterDelay:1];
 				NSLog(@"Stopping controller");
 			} else if(fabs(xValue - oldX) > 0.1 ) {
 				NSLog(@"Changing value to %f", xValue);
-				[NSObject cancelPreviousPerformRequestsWithTarget:self.foo.evil selector:@selector(animateEye) object:nil];
-				[self.foo.evil moveEyeTo:((-xValue*0.5)+0.5)*self.foo.evil.frame.size.width animated:NO];
+				[NSObject cancelPreviousPerformRequestsWithTarget:self.foo selector:@selector(animateEye) object:nil];
+				[self.foo moveEyeTo:((-xValue*0.5)+0.5) animated:NO];
 				oldX = xValue;
 			}
 		};
@@ -196,7 +196,8 @@
 		_extW = [[UIWindow alloc] initWithFrame:_screen.bounds];
 		_extW.screen = _screen;
 		_extW.hidden = NO;
-		_extW.rootViewController = _externalVC;
+		_externalVC.view.frame = _screen.fixedCoordinateSpace.bounds;
+		[_extW addSubview:_externalVC.view];
 	}
 }
 @end

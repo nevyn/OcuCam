@@ -10,5 +10,7 @@
 #import "EVILLayer.h"
 
 @interface EVILViewController : UIViewController
-@property(nonatomic) EVILLayer *evil;
+// 0,0-1,0
+- (void)moveEyeTo:(CGFloat)p animated:(BOOL)animated;
+- (void)animateEye;
 @end
