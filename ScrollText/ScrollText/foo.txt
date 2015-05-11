@@ -1,0 +1,1284 @@
+//
+//  AppDelegate.h
+//  OcuCam
+//
+//  Created by Joachim Bengtsson on 2014-10-23.
+//  Copyright (c) 2014 Thirdcog. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
+
+
+@end
+
+
+
+#import "AppDelegate.h"
+#import "ExtVC.h"
+#import "EVILViewController.h"
+#import "TCAHPSimpleClient.h"
+#import "EVILViewController2.h"
+
+@import AVFoundation;
+@import GameController;
+
+@interface AppDelegate () <TCAsyncHashProtocolDelegate>
+
+@end
+
+@interface Foo : EVILViewController
+@property(nonatomic) IBOutlet UITextView *text;
+@end
+@implementation Foo
+{
+	AVPlayer *a, *b, *c, *d, *e;
+}
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	a = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/by your command" withExtension:@"wav"]];
+	b = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/extermination" withExtension:@"wav"]];
+	c = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/fire weapons" withExtension:@"wav"]];
+	d = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/leave no survivors" withExtension:@"wav"]];
+	e = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/scan for identification" withExtension:@"wav"]];
+}
+- (ExtVC*)ext
+{
+	return [(AppDelegate*)[[UIApplication sharedApplication] delegate] valueForKey:@"externalVC"];
+}
+- (IBAction)a:(id)sender
+{
+	[self.ext a];
+}
+- (IBAction)b:(id)sender
+{
+	[self.ext b];
+}
+
+- (IBAction)s1:(id)sender
+{
+    [a seekToTime:CMTimeMake(0, 1)];
+	[a play];
+}
+- (IBAction)s2:(id)sender
+{
+    [b seekToTime:CMTimeMake(0, 1)];
+	[b play];
+}
+- (IBAction)s3:(id)sender
+{
+    [c seekToTime:CMTimeMake(0, 1)];
+	[c play];
+}
+- (IBAction)s4:(id)sender
+{
+    [d seekToTime:CMTimeMake(0, 1)];
+	[d play];
+}
+- (IBAction)s5:(id)sender
+{
+    [e seekToTime:CMTimeMake(0, 1)];
+	[e play];
+}
+@end
+
+@implementation AppDelegate
+{
+	ExtVC *_externalVC;
+	UIWindow *_extW;
+	UIScreen *_screen;
+	TCAHPSimpleClient *_client;
+}
+
+- (Foo*)foo {
+	return (Foo*)self.window.rootViewController;
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+	NSError *err;
+	if(!([[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&err])) {
+		NSLog(@"ASCategErr: %@", err);
+	}
+	if(![[AVAudioSession sharedInstance] setActive:YES error:&err]) {
+		NSLog(@"ASSerr: %@", err);
+	}
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged:) name:UIScreenDidConnectNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged:) name:UIScreenDidDisconnectNotification object:nil];
+	[self screensChanged:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupControllers:) name:GCControllerDidConnectNotification object:nil];
+	[GCController startWirelessControllerDiscoveryWithCompletionHandler:nil];
+	[self setupControllers:nil];
+	
+	_client = [[TCAHPSimpleClient alloc] initConnectingToAnyHostOfType:@"_vidya._tcp" delegate:self];
+	[_client reconnect];
+	
+	return YES;
+}
+
+- (void)setupControllers:(NSNotification*)notif
+{
+	[_externalVC setString:[@([GCController controllers].count) description] forKey:@"NUMCTRL"];
+	int i = 0;
+	for(GCController *controller in [GCController controllers]) {
+		NSLog(@"Connecting controller %@", controller);
+		if(controller.playerIndex == GCControllerPlayerIndexUnset)
+			controller.playerIndex = i++;
+		
+		__block float oldX = 0;
+		controller.extendedGamepad.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *dpad, float xValue, float yValue) {
+			if(yValue > -0.05 && yValue < 0.05 && xValue > -0.05 && xValue < 0.05) {
+				[self.foo performSelector:@selector(animateEye) withObject:nil afterDelay:1];
+				[_externalVC setString:@"><" forKey:@"CTRL"];
+				NSLog(@"Stopping controller");
+			} else if(fabs(xValue - oldX) > 0.1 ) {
+				NSLog(@"Changing value to %f", xValue);
+				float v = ((-xValue*0.5)+0.5);
+				[_externalVC setString:[NSString stringWithFormat:@"%.02f", v] forKey:@"CTRL"];
+				[self.foo moveEyeTo:v animated:NO];
+				[NSObject cancelPreviousPerformRequestsWithTarget:self.foo selector:@selector(animateEye) object:nil];
+				oldX = xValue;
+			}
+		};
+		controller.gamepad.buttonA.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s1:nil];
+		};
+		controller.gamepad.buttonB.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s2:nil];
+		};
+		controller.gamepad.buttonX.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s3:nil];
+		};
+		controller.gamepad.buttonY.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s4:nil];
+		};
+		controller.extendedGamepad.rightShoulder.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo s5:nil];
+		};
+		
+		controller.extendedGamepad.leftTrigger.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo a:nil];
+		};
+		controller.extendedGamepad.rightTrigger.pressedChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed) {
+			if(pressed)
+				[self.foo b:nil];
+		};
+
+
+	}
+}
+
+-(void)protocol:(TCAsyncHashProtocol*)proto receivedHash:(NSDictionary*)hash payload:(NSData*)payload;
+{
+	NSData *data = hash[@"image"];
+	if(data) {
+		UIImage *image = [UIImage imageWithData:data];
+		[_externalVC setRemoteImage:image];
+		return;
+	}
+	NSString *cmd = hash[@"command"];
+	NSLog(@"Command: %@", hash);
+	if([cmd isEqualToString:@"playSound"]) {
+		NSString *sel = [NSString stringWithFormat:@"s%@:", hash[@"soundId"]];
+		[[self foo] performSelector:NSSelectorFromString(sel) withObject:nil];
+	} else if([cmd isEqualToString:@"displayMessage"]) {
+		[_externalVC addMessage:hash[@"message"]];
+	}
+}
+
+
+
+- (void)screensChanged:(NSNotification*)notif
+{
+	UITextView *text = [(Foo*)[[[UIApplication sharedApplication] keyWindow] rootViewController] text];
+
+	NSArray *screens = [UIScreen screens];
+	[_externalVC setString:[@([UIScreen screens].count) description] forKey:@"NUMSCR"];
+	if(screens.count == 1) {
+		_externalVC = nil;
+		_extW.hidden = YES;
+		_extW = nil;
+		_screen = nil;
+		text.text = @"disconnected";
+	} else {
+		_screen = screens.lastObject;
+		
+		text.text = [_screen.availableModes description];
+		UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+		_externalVC = [sb instantiateViewControllerWithIdentifier:@"external"];
+		_extW = [[UIWindow alloc] initWithFrame:_screen.bounds];
+		_extW.screen = _screen;
+		_extW.hidden = NO;
+		_externalVC.view.frame = _screen.fixedCoordinateSpace.bounds;
+		[_extW addSubview:_externalVC.view];
+	}
+}
+@end
+
+
+//
+//  ExtVC.h
+//  OcuCam
+//
+//  Created by Joachim Bengtsson on 2014-10-24.
+//  Copyright (c) 2014 Thirdcog. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ExtVC : UIViewController
+- (void)setString:(NSString*)string forKey:(NSString*)key;
+- (void)a;
+- (void)b;
+- (void)setRemoteImage:(UIImage*)image;
+- (void)addMessage:(NSString*)message;
+@end
+
+
+//
+//  ExtVC.m
+//  OcuCam
+//
+//  Created by Joachim Bengtsson on 2014-10-24.
+//  Copyright (c) 2014 Thirdcog. All rights reserved.
+//
+
+#import "ExtVC.h"
+#import <AVFoundation/AVFoundation.h>
+#import "OcuCam-Swift.h"
+
+@interface ExtVC ()
+
+@end
+
+@implementation ExtVC
+{
+    AVCaptureSession *_captureSession;
+    AVCaptureDevice *_device;
+    AVCaptureDeviceInput *_videoInput;
+    AVCaptureVideoPreviewLayer *_preview;
+    CAReplicatorLayer *_replicator;
+	float _eyeSeparation;
+	CALayer *_remoteImageLayer;
+	CATextLayer *_text;
+	CATextLayer *_infoText;
+	NSMutableDictionary *_infos;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	if(!(self = [super initWithCoder:aDecoder]))
+		return nil;
+	
+	_infos = [NSMutableDictionary new];
+	
+	return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	_eyeSeparation = [[NSUserDefaults standardUserDefaults] floatForKey:@"sep"];
+	
+	self.view.backgroundColor = [UIColor darkGrayColor];
+	
+	_captureSession = [AVCaptureSession new];
+    
+    // 1. Choose device
+    for (AVCaptureDevice *device in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo])
+        if(device.position == AVCaptureDevicePositionFront)
+            _device = device;
+	
+    if(!_device) {
+		NSLog(@"Aww no device");
+		self.view.backgroundColor = [UIColor redColor];
+    }
+    
+    // 2. Input
+	NSError *error = nil;
+	_videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:_device error:&error];
+    if(!_videoInput || ![_captureSession canAddInput:_videoInput]) {
+        NSLog(@"-[[AVCaptureDeviceInput alloc] initWithDevice:error:]: %@", error);
+		self.view.backgroundColor = [UIColor redColor];
+    }
+	
+	CGRect r = self.view.bounds;
+	r.size.width /= 2;
+	
+	if(_videoInput) {
+		// 4. Configure
+		[_captureSession beginConfiguration];
+			_captureSession.sessionPreset = AVCaptureSessionPresetMedium;
+			[_captureSession addInput:_videoInput];
+		[_captureSession commitConfiguration];
+
+		// 5. Run!
+		[_captureSession startRunning];
+		
+		_preview = [AVCaptureVideoPreviewLayer layerWithSession:_captureSession];
+		_preview.frame = r;
+		_preview.orientation = [UIApplication sharedApplication].statusBarOrientation;
+		_preview.automaticallyAdjustsMirroring = NO;
+		_preview.mirrored = NO;
+	}
+	
+	_replicator = [CAReplicatorLayer layer];
+	_replicator.frame = self.view.bounds;
+	_replicator.instanceCount = 2;
+	[self adjustTransform];
+	if(_preview)
+		[_replicator addSublayer:_preview];
+	OcuHUDLayer *hud = [[OcuHUDLayer alloc] initWithFrame:r];
+	[_replicator addSublayer:hud];
+	
+	_remoteImageLayer = [[CALayer alloc] init];
+	_remoteImageLayer.frame = CGRectMake(400, 150, 120, 100);
+	_remoteImageLayer.backgroundColor = [UIColor greenColor].CGColor;
+	[_replicator addSublayer:_remoteImageLayer];
+	
+	_text = [[CATextLayer alloc] init];
+	_text.fontSize = 24;
+	CGFontRef font = CGFontCreateWithFontName((CFStringRef)@"HelveticaNeue-Regular");
+	_text.font = font;
+	_text.string = @"hello";
+	_text.frame = CGRectMake(self.view.frame.size.width/4, self.view.frame.size.height/2, 100, 100);
+	_text.foregroundColor = [UIColor whiteColor].CGColor;
+	[_text display];
+	[_replicator addSublayer:_text];
+	
+	_infoText = [[CATextLayer alloc] init];
+	_infoText.fontSize = 18;
+	CGFontRef font2 = CGFontCreateWithFontName((CFStringRef)@"Courier New");
+	_infoText.font = font2;
+	_infoText.string = @"##";
+	_infoText.frame = CGRectMake(self.view.frame.size.width/10, self.view.frame.size.height/4, self.view.frame.size.width, self.view.frame.size.height);
+	_infoText.foregroundColor = [UIColor whiteColor].CGColor;
+	[_replicator addSublayer:_infoText];
+	
+	[self setString:@"##" forKey:@"CD"];
+	
+	
+	[self.view.layer addSublayer:_replicator];
+	[hud addAnimations];
+}
+
+- (void)setString:(NSString*)string forKey:(NSString*)key
+{
+	_infos[key] = string;
+	NSMutableString *str = [NSMutableString new];
+	for(NSString *key in _infos.allKeys) {
+		[str appendFormat:@"%@: %@\n", key, _infos[key]];
+	}
+	_infoText.string = str;
+	[_infoText display];
+}
+
+- (void)a
+{
+	_eyeSeparation += 1;
+	[[NSUserDefaults standardUserDefaults] setFloat:_eyeSeparation forKey:@"sep"];
+	[self adjustTransform];
+}
+- (void)b
+{
+	_eyeSeparation -= 1;
+	[[NSUserDefaults standardUserDefaults] setFloat:_eyeSeparation forKey:@"sep"];
+	[self adjustTransform];
+}
+- (void)adjustTransform
+{
+	CGRect r = self.view.bounds;
+	r.size.width /= 2;
+	_replicator.instanceTransform = CATransform3DMakeTranslation(r.size.width + _eyeSeparation, 0, 0.0);
+	[self setString:[@(_eyeSeparation) description] forKey:@"EYESEP"];
+	NSLog(@"Separation: %f", _eyeSeparation);
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	
+    [_preview removeFromSuperlayer];
+	[_captureSession stopRunning];
+}
+
+- (void)setRemoteImage:(UIImage*)image
+{
+	_remoteImageLayer.contents = (id)image.CGImage;
+}
+
+- (void)addMessage:(NSString*)message
+{
+	_text.string = message;
+}
+
+
+@end
+
+
+//
+//  EVILLayer.h
+//  CylonicCA
+//
+//  Created by Joachim Bengtsson on 2013-11-02.
+//  Copyright (c) 2013 Joachim Bengtsson. All rights reserved.
+//
+
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
+
+@interface EVILLayer : CALayer
+- (void)moveEyeTo:(CGFloat)p animated:(BOOL)animated;
+- (void)animateEye;
+@end
+
+
+
+
+//
+//  EVILLayer.m
+//  CylonicCA
+//
+//  Created by Joachim Bengtsson on 2013-11-02.
+//  Copyright (c) 2013 Joachim Bengtsson. All rights reserved.
+//
+
+#import "EVILLayer.h"
+@import AVFoundation;
+
+@implementation EVILLayer
+{
+    CAGradientLayer *_slit;
+    CALayer *_outerGlow;
+    CALayer *_innerGlow;
+    CALayer *_innerImage;
+    AVPlayer *_swoosh;
+    NSTimer *_swooshTimer;
+}
+
+- (id)init
+{
+    if(!(self = [super init]))
+        return nil;
+    
+    //_swoosh = [AVPlayer playerWithURL:[[NSBundle mainBundle] URLForResource:@"sounds/eye" withExtension:@"wav"]];
+    
+    [self performSelector:@selector(setup) withObject:nil afterDelay:0];
+    
+    return self;
+}
+
+- (void)setup
+{
+    _slit = [CAGradientLayer new];
+    _slit.colors = @[
+        (id)[UIColor colorWithRed:0.199 green:0.010 blue:0.033 alpha:1.000].CGColor,
+        (id)[UIColor colorWithRed:0.663 green:0.000 blue:0.067 alpha:1.000].CGColor,
+        (id)[UIColor colorWithRed:0.199 green:0.010 blue:0.033 alpha:1.000].CGColor,
+    ];
+    _slit.startPoint = CGPointMake(0, 0);
+    _slit.endPoint = CGPointMake(1, 0);
+    _slit.cornerRadius = 4;
+    
+    float h = 50;
+    _slit.frame = CGRectMake(100, self.frame.size.height/2-h/2, self.frame.size.width-200, h);
+    _slit.shadowColor = [UIColor colorWithRed:0.256 green:0.006 blue:0.038 alpha:1.000].CGColor;
+    _slit.shadowOffset = CGSizeMake(0, 0);
+    _slit.shadowRadius = 2;
+    _slit.shadowOpacity = 0.6;
+    
+    _outerGlow = [CALayer new];
+    _outerGlow.contents = (id)[UIImage imageNamed:@"OuterGlow"].CGImage;
+    _outerGlow.bounds = CGRectMake(0, 0, 512, 512);
+    _outerGlow.position = CGPointMake(_slit.frame.origin.x+50, self.frame.size.height/2);
+    
+    _innerGlow = [CALayer new];
+    _innerGlow.frame = _slit.frame;
+    _innerGlow.cornerRadius = 4;
+    _innerGlow.masksToBounds = YES;
+    _innerImage = [CALayer new];
+    _innerImage.contents = (id)[UIImage imageNamed:@"InnerGlow"].CGImage;
+    _innerImage.bounds = CGRectMake(0, 0, 512, 512);
+    _innerImage.position = CGPointMake(50, _innerGlow.frame.size.height/2);
+    [_innerGlow addSublayer:_innerImage];
+    
+    [self addSublayer:_outerGlow];
+    [self addSublayer:_slit];
+    [self addSublayer:_innerGlow];
+    
+    [self animateEye];
+}
+
+- (void)moveEyeTo:(CGFloat)newX animated:(BOOL)animated;
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [_swooshTimer invalidate];
+	
+	newX = MAX(140, MIN(self.frame.size.width-120, newX));
+	
+	CGPoint point = [(CALayer*)_innerImage.presentationLayer position];
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"position.x"];
+    anim.fromValue = @(point.x);
+    anim.toValue = @(newX - _innerGlow.frame.origin.x);
+    anim.duration = animated ? 0.2 : 0.01;
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+	
+	point.y = _innerGlow.frame.size.height/2;
+	point.x = newX - _innerGlow.frame.origin.x;
+	_innerImage.position = point;
+	if(animated)
+		[_innerImage addAnimation:anim forKey:@"sweep"];
+	else
+		[_innerImage removeAnimationForKey:@"sweep"];
+	
+	point = [(CALayer*)_outerGlow.presentationLayer position];
+    anim.fromValue = @(point.x);
+    anim.toValue = @(newX);
+	
+	point.y = self.frame.size.height/2;
+	point.x = newX;
+	_outerGlow.position = point;
+	if(animated)
+		[_outerGlow addAnimation:anim forKey:@"sweep"];
+	else
+		[_outerGlow removeAnimationForKey:@"sweep"];
+}
+
+- (void)animateEye
+{
+    [self moveEyeTo:140 animated:YES];
+    [self performSelector:@selector(animateEye2) withObject:Nil afterDelay:0.2];
+}
+
+static const float duration = 2.2;
+
+- (void)animateEye2
+{
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"position.x"];
+    anim.byValue = @(_innerGlow.frame.size.width-100);
+    anim.duration = duration;
+    anim.repeatCount = 1e100;
+    anim.autoreverses = YES;
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [self performSelector:@selector(startSwoosh) withObject:nil afterDelay:0.4];
+    
+    [_innerImage addAnimation:anim forKey:@"sweep"];
+    [_outerGlow addAnimation:anim forKey:@"sweep"];
+}
+
+- (void)startSwoosh
+{
+    [self swoosh];
+    [_swooshTimer invalidate];
+    _swooshTimer = [NSTimer scheduledTimerWithTimeInterval:duration target:self selector:@selector(swoosh) userInfo:nil repeats:YES];
+}
+
+- (void)swoosh
+{
+    [_swoosh seekToTime:CMTimeMake(0, 1)];
+    [_swoosh play];
+}
+
+@end
+//
+//  EVILViewController.m
+//  CylonicCA
+//
+//  Created by Joachim Bengtsson on 2013-11-02.
+//  Copyright (c) 2013 Joachim Bengtsson. All rights reserved.
+//
+
+#import "EVILViewController.h"
+
+@interface EVILViewController ()
+@property(nonatomic) EVILLayer *evil;
+@end
+
+@implementation EVILViewController
+- (void)moveEyeTo:(CGFloat)p animated:(BOOL)animated
+{
+	[self.evil moveEyeTo:p*self.evil.frame.size.width animated:animated];
+}
+- (void)animateEye
+{
+	[self.evil animateEye];
+}
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+- (void)viewDidLoad
+{
+    _evil = [[EVILLayer alloc] init];
+    _evil.frame = self.view.bounds;
+    [self.view.layer addSublayer:_evil];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [_evil setFrame:self.view.bounds];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_evil moveEyeTo:[[touches anyObject] locationInView:self.view].x animated:YES];
+}
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_evil moveEyeTo:[[touches anyObject] locationInView:self.view].x animated:NO];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_evil animateEye];
+}
+
+@end
+
+
+//
+//  OcuHUDLayer.swift
+//  OcuHUD
+//
+//  Created by Joachim Bengtsson on 2014-10-24.
+//  Copyright (c) 2014 Thirdcog. All rights reserved.
+//
+
+import Foundation
+import QuartzCore
+import UIKit
+
+func frand() -> Double
+{
+	return Double(arc4random_uniform(1000))/1000.0
+}
+
+class OcuHUDLayer : CALayer {
+	
+	let circle = CAShapeLayer()
+	let thickArc = CAShapeLayer()
+	var lines : [CAShapeLayer] = []
+	let endAngle = M_PI*1.2
+	func commonInit() {
+		let color1 = UIColor(white: 0.5, alpha: 0.6).CGColor
+		let color2 = UIColor(red: 0.8, green: 0, blue: 0, alpha: 0.4).CGColor
+
+		
+		let r = self.frame.size.height/4.0
+		let mid = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
+		
+		var bzp = UIBezierPath()
+		bzp.addArcWithCenter(CGPointZero, radius: r, startAngle: 0, endAngle: CGFloat(endAngle), clockwise: true)
+		circle.path = bzp.CGPath
+		circle.strokeColor = color1
+		circle.fillColor = UIColor.clearColor().CGColor
+		circle.lineWidth = 2
+		circle.position = mid
+		self.addSublayer(circle)
+		
+		for index in 0...10 {
+			let line = CAShapeLayer()
+			let bzp = UIBezierPath()
+			bzp.moveToPoint(CGPoint(x: cos(0)*r*0.8, y: sin(0)*r*0.8))
+			bzp.addLineToPoint(CGPoint(x: cos(0)*r, y: sin(0)*r))
+			line.path = bzp.CGPath
+			line.strokeColor = color2
+			line.lineWidth = 2
+			lines.append(line)
+			circle.addSublayer(line)
+		}
+		
+		let endcap1 = CAShapeLayer()
+		bzp = UIBezierPath()
+		bzp.moveToPoint(CGPoint(x: cos(0)*r*0.8, y: sin(0)*r*0.8))
+		bzp.addLineToPoint(CGPoint(x: cos(0)*r, y: sin(0)*r))
+		endcap1.path = bzp.CGPath
+		endcap1.strokeColor = color1
+		endcap1.lineWidth = 2
+		circle.addSublayer(endcap1)
+		
+		let endcap2 = CAShapeLayer()
+		bzp = UIBezierPath()
+		bzp.moveToPoint(CGPoint(x: cos(endAngle)*Double(r)*0.8, y: sin(endAngle)*Double(r)*0.8))
+		bzp.addLineToPoint(CGPoint(x: cos(endAngle)*Double(r), y: sin(endAngle)*Double(r)))
+		endcap2.path = bzp.CGPath
+		endcap2.strokeColor = color1
+		endcap2.lineWidth = 2
+		circle.addSublayer(endcap2)
+		
+		bzp = UIBezierPath()
+		bzp.addArcWithCenter(CGPointZero, radius: r + 2, startAngle: 0, endAngle: CGFloat(endAngle*0.2), clockwise: true)
+		thickArc.path = bzp.CGPath
+		thickArc.strokeColor = color2
+		thickArc.fillColor = UIColor.clearColor().CGColor
+		thickArc.lineWidth = 4
+		//thickArc.position = mid
+		circle.addSublayer(thickArc)
+
+		
+	}
+	init(frame: CGRect) {
+		super.init()
+		self.frame = frame
+		commonInit()
+	}
+	override init() {
+		super.init()
+		commonInit()
+	}
+	required init(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		commonInit()
+	}
+	
+	func addAnimations() {
+		for line in lines {
+			let anim = CABasicAnimation(keyPath: "transform.rotation.z")
+			anim.toValue = endAngle
+			anim.duration = frand()*6.0 + 1.0
+			anim.removedOnCompletion = false
+			anim.repeatCount = 1e100
+			if arc4random_uniform(2) == 0 {
+				anim.autoreverses = true
+			}
+			line.addAnimation(anim, forKey: "rot")
+		}
+		
+		let anim = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+		anim.values = (0...100).map {
+			Int -> Double in
+			return frand()*M_PI*2
+		}
+		anim.removedOnCompletion = false
+		anim.repeatCount = 1e100
+		anim.duration = 240
+		circle.addAnimation(anim, forKey: "rotate")
+		
+
+
+		let anim2 = CABasicAnimation(keyPath: "transform.rotation.z")
+		anim2.toValue = M_PI*0.95
+		anim2.duration = 2
+		anim2.removedOnCompletion = false
+		anim2.repeatCount = 1e100
+		anim2.autoreverses = true
+		thickArc.addAnimation(anim2, forKey: "rot")
+	}
+}
+
+//
+//  TCAHPSimpleClient.m
+//  TCAHPDemo
+//
+//  Created by Joachim Bengtsson on 2012-10-06.
+//
+//
+
+#import "TCAHPSimpleClient.h"
+
+@interface TCAHPSimpleClient () <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
+@end
+
+@implementation TCAHPSimpleClient {
+    NSNetServiceBrowser *_browser;
+    AsyncSocket *_connectingSocket;
+    NSString *_serviceType;
+    id<TCAsyncHashProtocolDelegate> _delegate;
+    NSMutableSet *_pendingResolve;
+    NSMutableSet *_resolved;
+	NSTimer *_reconnect;
+}
+- (id)initConnectingToAnyHostOfType:(NSString*)serviceType delegate:(id<TCAsyncHashProtocolDelegate>)delegate
+{
+    if(!(self = [super init]))
+        return nil;
+    
+    _pendingResolve = [NSMutableSet new];
+    _resolved = [NSMutableSet new];
+    
+    _browser = [[NSNetServiceBrowser alloc] init];
+    _browser.delegate = self;
+    _serviceType = serviceType;
+    [_browser searchForServicesOfType:serviceType inDomain:@""];
+    
+    _delegate = delegate;
+    
+    return self;
+}
+
+- (void)reconnect;
+{
+	NSLog(@"Disconnecting and reconnecting to %@", _resolved);
+    [_proto.socket disconnect];
+    [_connectingSocket disconnect];
+    _proto = nil;
+    _connectingSocket = nil;
+
+    if(_resolved.count > 0)
+        [self connectToNetService:_resolved.anyObject];
+}
+
+- (void)connectToNetService:(NSNetService*)aNetService
+{
+    NSLog(@"Attempting connection to %@", aNetService);
+    
+    NSError *err;
+    _connectingSocket = [[AsyncSocket alloc] initWithDelegate:self];
+    for(NSData *address in aNetService.addresses)
+        if(![_connectingSocket connectToAddress:address error:&err])
+            NSLog(@"Failed connection to %@: %@", aNetService, err);
+        else
+            return;
+	
+	NSLog(@"Failed to connect, starting retry");
+	[self startReconnecting];
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
+{
+    NSLog(@"Attempting resolution of %@", aNetService);
+    [_pendingResolve addObject:aNetService];
+    aNetService.delegate = self;
+    [aNetService resolveWithTimeout:5];
+}
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
+{
+	NSLog(@"Lost service %@", aNetService);
+    [_pendingResolve removeObject:aNetService];
+    [_resolved removeObject:aNetService];
+}
+
+- (void)netServiceDidResolveAddress:(NSNetService *)aNetService
+{
+	NSLog(@"Did resolve %@", aNetService);
+    [_resolved addObject:aNetService];
+    [_pendingResolve removeObject:aNetService];
+    
+    if (_proto || _connectingSocket)
+        return;
+    
+    [self connectToNetService:aNetService];
+}
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict;
+{
+    NSLog(@"Failed to resolve %@: %@", sender, errorDict);
+    [_pendingResolve removeObject:sender];
+}
+
+- (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
+{
+    NSLog(@"Connected to %@", host);
+    self.proto = [[TCAsyncHashProtocol alloc] initWithSocket:sock delegate:(id)self];
+    _connectingSocket = nil;
+	_proto.autoDispatchCommands = YES;
+	[_proto readHash];
+	[_reconnect invalidate]; _reconnect = nil;
+}
+
+- (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err
+{
+	NSLog(@"Disconnection reason: %@ %@", sock, err);
+}
+
+- (void)onSocketDidDisconnect:(AsyncSocket *)sock
+{
+    NSLog(@"Disconnected %@", sock);
+    _connectingSocket = nil;
+    self.proto = nil;
+    [_browser searchForServicesOfType:_serviceType inDomain:@""];
+	[self startReconnecting];
+}
+
+- (void)startReconnecting
+{
+	[_reconnect invalidate];
+	_reconnect = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(reconnect) userInfo:nil repeats:YES];
+}
+
+// Forward AsyncSocket delegates.
+-(NSMethodSignature*)methodSignatureForSelector:(SEL)aSelector;
+{
+	if([super respondsToSelector:aSelector]) return [super methodSignatureForSelector:aSelector];
+	if([_delegate respondsToSelector:aSelector]) return [(id)_delegate methodSignatureForSelector:aSelector];
+	return nil;
+}
+-(void)forwardInvocation:(NSInvocation *)anInvocation;
+{
+	if([_delegate respondsToSelector:anInvocation.selector]) {
+		anInvocation.target = _delegate;
+		[anInvocation invoke];
+        return;
+	}
+	[super forwardInvocation:anInvocation];
+}
+-(BOOL)respondsToSelector:(SEL)aSelector;
+{
+	return [super respondsToSelector:aSelector] || [_delegate respondsToSelector:aSelector];
+}
+@end
+
+
+
+
+//
+//  TCAHPSimpleServer.m
+//  TCAHPDemo
+//
+//  Created by Joachim Bengtsson on 2012-10-06.
+//
+//
+
+#import "TCAHPSimpleServer.h"
+#import "AsyncSocket.h"
+#import "TCAsyncHashProtocol.h"
+
+@interface TCAHPSimpleServer () <NSNetServiceDelegate>
+@end
+
+@implementation TCAHPSimpleServer {
+	AsyncSocket *_listen;
+	NSMutableArray *_clients;
+	NSTimer *_timer;
+    NSNetService *_service;
+    id _delegate;
+    NSString *_serviceType, *_serviceName; int _port;
+}
+- (id)initOnBasePort:(int)port serviceType:(NSString*)serviceType serviceName:(NSString*)serviceName delegate:(id)delegate error:(NSError**)err
+{
+	if(!(self = [super init]))
+        return nil;
+    
+    _delegate = delegate;
+    
+    _port = port;
+	_listen = [[AsyncSocket alloc] initWithDelegate:self];
+	_clients = [NSMutableArray new];
+    if(![_listen acceptOnPort:_port error:err])
+        return nil;
+    
+    _serviceName = serviceName; _serviceType = serviceType;
+    _service = [[NSNetService alloc] initWithDomain:@"" type:_serviceType name:_serviceName port:_port];
+    _service.delegate = self;
+	[_service publish];
+    
+	return self;
+}
+
+- (void)onSocket:(AsyncSocket *)sock didAcceptNewSocket:(AsyncSocket *)newSocket;
+{
+	// The TCAHP takes ownership of the socket and becomes its delegate. We only need to implement
+	// TCAHP's delegate now.
+	TCAsyncHashProtocol *proto = [[TCAsyncHashProtocol alloc] initWithSocket:newSocket delegate:_delegate];
+	
+	// Dispatch on selector of the incoming command instead of using delegate methods.
+	proto.autoDispatchCommands = YES;
+	
+	// Hang on to it, or else it has no owner and will disconnect.
+	[_clients addObject:proto];
+    
+    NSLog(@"Accepted new connection %@", newSocket);
+    if([_delegate respondsToSelector:@selector(server:acceptedNewClient:)])
+        [_delegate server:self acceptedNewClient:proto];
+}
+- (void)onSocketDidDisconnect:(AsyncSocket *)sock;
+{
+	TCAsyncHashProtocol *proto = nil;
+	for(TCAsyncHashProtocol *potential in _clients)
+		if(potential.socket == sock) proto = potential;
+    
+    NSLog(@"Lost connection %@", sock);
+    if([_delegate respondsToSelector:@selector(server:lostClient:)])
+        [_delegate server:self lostClient:proto];
+	[_clients removeObject:proto];
+}
+
+- (void)broadcast:(NSDictionary*)hash;
+{
+	for(TCAsyncHashProtocol *proto in _clients)
+		[proto sendHash:hash];
+}
+
+- (void)netServiceDidPublish:(NSNetService *)sender
+{
+    NSLog(@"Published %@", self);
+}
+
+- (void)netService:(NSNetService *)sender didNotPublish:(NSDictionary *)errorDict;
+{
+    NSLog(@"NOTE: Did not publish %@: %@", self, errorDict);
+}
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"<%@:%p %@/%@/%d>", [self class], self, _serviceType, _serviceName, _port];
+}
+@end
+
+
+#import "TCAsyncHashProtocol.h"
+
+#if !__has_feature(objc_arc)
+#error This file must be compiled with -fobjc-arc.
+#endif
+
+#define TC_DEBUG_HASHPROTO 0
+
+#if TC_DEBUG_HASHPROTO
+#define TCLog(...) NSLog(__VA_ARGS__)
+#else
+#define TCLog(...)
+#endif
+
+static NSString *TCUUID(void);
+
+enum {
+	kTagLength,
+	kTagData,
+	kTagPayload,
+};
+
+// Private keys
+static NSString *const kTCAsyncHashProtocolRequestKey = @"__tcahp-requestKey";
+static NSString *const kTCAsyncHashProtocolResponseKey = @"__tcahp-responseKey";
+static NSString *const kTCAsyncHashProtocolPayloadSizeKey = @"__tcahp-payloadSize";
+// Public keys
+       NSString *const kTCCommand = @"command";
+
+@interface TCAsyncHashProtocol ()
+@property(nonatomic,strong,readwrite) AsyncSocket *socket;
+@end
+
+@implementation TCAsyncHashProtocol {
+	NSMutableDictionary *requests;
+	NSDictionary *savedHash;
+	BOOL _hasOutstandingHashRead;
+	BOOL _customSerialization;
+}
+@synthesize socket = _socket, delegate = _delegate, autoReadHash = _autoReadHash;
+@synthesize autoDispatchCommands = _autoDispatchCommands;
+
+-(id)initWithSocket:(AsyncSocket*)sock delegate:(id<TCAsyncHashProtocolDelegate>)delegate;
+{
+	if(!(self = [super init])) return nil;
+	
+	self.socket = sock;
+	_autoReadHash = YES;
+	_socket.delegate = self;
+	_delegate = delegate;
+	requests = [NSMutableDictionary dictionary];
+	
+	BOOL supportsSerialization = [delegate respondsToSelector:@selector(protocol:serializeHash:)];
+	BOOL supportsUnserialization = [delegate respondsToSelector:@selector(protocol:unserializeHash:)];
+	_customSerialization = supportsSerialization && supportsUnserialization;
+	NSAssert(~(supportsSerialization ^ supportsUnserialization), @"Must support neither, or both.");
+	
+	return self;
+}
+-(void)dealloc;
+{
+	_socket.delegate = nil;
+}
+
+// Forward AsyncSocket delegates.
+-(NSMethodSignature*)methodSignatureForSelector:(SEL)aSelector;
+{
+	if([super respondsToSelector:aSelector]) return [super methodSignatureForSelector:aSelector];
+	if([_delegate respondsToSelector:aSelector]) return [(id)_delegate methodSignatureForSelector:aSelector];
+	return nil;
+}
+-(void)forwardInvocation:(NSInvocation *)anInvocation;
+{
+	if([_delegate respondsToSelector:anInvocation.selector]) {
+		anInvocation.target = _delegate;
+		[anInvocation invoke];
+        return;
+	}
+	[super forwardInvocation:anInvocation];
+}
+-(BOOL)respondsToSelector:(SEL)aSelector;
+{
+	return [super respondsToSelector:aSelector] || [_delegate respondsToSelector:aSelector];
+}
+
+#pragma mark Serialization
+/*
+	TCAHP doesn't really care about the encoding of the payload. JSON and plist
+	are easy to debug, and also ensures that only our standard 'PODdy' classes
+	are ever instantiated. Using NSCoding archiving is incredibly powerful,
+	but opens up for remote code execution if we're not careful. Adding a layer of
+	compression here would be trivial. You could even use protobuf for your transport,
+	if you mapped hashes to protobuf messages (by looking at the 'command' key), once you're
+	done prototyping your protocol.
+*/
+-(NSData*)serialize:(id)thing;
+{
+	return [NSKeyedArchiver archivedDataWithRootObject:thing];
+}
+-(id)unserialize:(NSData*)unthing;
+{
+	return [NSKeyedUnarchiver unarchiveObjectWithData:unthing];
+}
+
+#pragma mark AsyncSocket
+- (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
+{
+	if([self.delegate respondsToSelector:_cmd]) [self.delegate onSocket:sock didConnectToHost:host port:port];
+	
+	if(self.autoReadHash) [self readHash];
+}
+-(BOOL)needsReadHashAfterDelegating:(NSDictionary*)hash payload:(NSData*)payload;
+{
+	NSString *reqKey = hash[kTCAsyncHashProtocolRequestKey];
+	NSString *respKey = hash[kTCAsyncHashProtocolResponseKey];
+	if(reqKey) {
+		
+		TCLog(@"INC REQU: %@ %@", [hash objectForKey:kTCCommand], reqKey);
+		
+		TCAsyncHashProtocolResponseCallback cb = ^(NSDictionary *response) {
+			NSMutableDictionary *resp2 = [response mutableCopy];
+			resp2[kTCAsyncHashProtocolResponseKey] = reqKey;
+			[self sendHash:resp2];
+		};
+		
+		NSString *selNs = [NSString stringWithFormat:@"request:%@:responder:", hash[@"command"]];
+		SEL sel = NSSelectorFromString(selNs);
+		
+		if(self.autoDispatchCommands && hash[kTCCommand] && [_delegate respondsToSelector:sel]) {
+            ((void(*)(id, SEL, id, id, TCAsyncHashProtocolResponseCallback))[(id)_delegate methodForSelector:sel])(_delegate, sel, self, hash, cb);
+		} else if([_delegate respondsToSelector:@selector(protocol:receivedRequest:payload:responder:)]) {
+			[_delegate protocol:self receivedRequest:hash payload:payload responder:cb];
+        } else {
+            NSLog(@"%@: Invalid request '%@' for delegate %@", self, hash[kTCCommand], _delegate);
+            [_socket disconnect];
+        }
+	}
+	if(respKey) {
+		TCLog(@"INC RESP: %@ %@", [hash objectForKey:kTCCommand], respKey);
+		TCAsyncHashProtocolResponseCallback cb = requests[respKey];
+		if(cb) cb(hash);
+		else NSLog(@"Discarded response: %@", hash);
+		[requests removeObjectForKey:respKey];
+		return YES; // we're not calling delegate at all, so MUST readHash here
+	} 
+	if(!reqKey && !respKey) {
+		NSString *command = hash[kTCCommand];
+		
+		TCLog(@"INC COMM: %@", [hash objectForKey:kTCCommand]);
+		
+		NSString *selNs = [NSString stringWithFormat:@"command:%@:", command];
+		SEL sel = NSSelectorFromString(selNs);
+		
+		if(self.autoDispatchCommands && hash[kTCCommand] && [_delegate respondsToSelector:sel]) {
+            ((void(*)(id, SEL, id, id))[(id)_delegate methodForSelector:sel])(_delegate, sel, self, hash);
+		} else if([_delegate respondsToSelector:@selector(protocol:receivedHash:payload:)]) {
+            [_delegate protocol:self receivedHash:hash payload:payload];
+        } else {
+            NSLog(@"%@: Invalid command '%@' for delegate %@", self, hash[kTCCommand], _delegate);
+            [_socket disconnect];
+        }
+	}
+	
+	return NO;
+}
+-(void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)inData withTag:(long)tag;
+{
+	__typeof(self) surviveEvenIfReleasedByDelegate = self;
+	(void)surviveEvenIfReleasedByDelegate;
+	
+	if(tag == kTagLength) {
+		uint32_t readLength = 0;
+		[inData getBytes:&readLength length:4];
+		readLength = ntohl(readLength);
+		[_socket readDataToLength:readLength withTimeout:-1 tag:kTagData];
+	} else if(tag == kTagData) {
+		NSDictionary *hash = [self unserialize:inData];
+		NSAssert(hash != nil, @"really should be unserializable");
+		
+		NSNumber *payloadSize = hash[kTCAsyncHashProtocolPayloadSizeKey];
+		if(payloadSize) {
+			savedHash = hash;
+			[sock readDataToLength:payloadSize.longValue withTimeout:-1 tag:kTagPayload];
+		} else {
+			_hasOutstandingHashRead = NO;
+			if([self needsReadHashAfterDelegating:hash payload:nil] || self.autoReadHash)
+				[self readHash];
+		}
+			
+	} else if(tag == kTagPayload) {
+		NSDictionary *hash = savedHash; savedHash = nil;
+		_hasOutstandingHashRead = NO;
+		
+		if([self needsReadHashAfterDelegating:hash payload:inData] || self.autoReadHash)
+			[self readHash];
+		
+	} else if([_delegate respondsToSelector:@selector(_cmd)])
+		[_delegate onSocket:sock didReadData:inData withTag:tag];
+}
+-(void)sendHash:(NSDictionary*)hash;
+{
+	[self sendHash:hash payload:nil];
+}
+-(void)sendHash:(NSDictionary*)hash payload:(NSData*)payload;
+{
+	if(payload) {
+		hash = [hash mutableCopy];
+		((NSMutableDictionary*)hash)[kTCAsyncHashProtocolPayloadSizeKey] = @(payload.length);
+	}
+	NSData *unthing = [self serialize:hash];
+	
+	TCLog(@"OUT %@: %@ %@", [hash objectForKey:kTCAsyncHashProtocolRequestKey]?@"REQU":[hash objectForKey:kTCAsyncHashProtocolResponseKey]?@"RESP":@"COMM", [hash objectForKey:kTCCommand], [hash objectForKey:kTCAsyncHashProtocolRequestKey]?:[hash objectForKey:kTCAsyncHashProtocolResponseKey]);
+
+	
+	uint32_t writeLength = htonl(unthing.length);
+	NSData *lengthD = [NSData dataWithBytes:&writeLength length:4];
+	[_socket writeData:lengthD withTimeout:-1 tag:kTagLength];
+	
+	[_socket writeData:unthing withTimeout:-1 tag:kTagData];
+	if(payload) [_socket writeData:payload withTimeout:-1 tag:kTagPayload];
+}
+-(TCAsyncHashProtocolRequestCanceller)requestHash:(NSDictionary*)hash response:(TCAsyncHashProtocolResponseCallback)response;
+{
+	NSString *uuid = TCUUID();
+	requests[uuid] = [response copy];
+	TCAsyncHashProtocolRequestCanceller canceller = ^{ [requests removeObjectForKey:uuid]; };
+	
+	NSMutableDictionary *hash2 = [hash mutableCopy];
+	hash2[kTCAsyncHashProtocolRequestKey] = uuid;
+	
+	[self sendHash:hash2];
+	
+	return canceller;
+}
+-(void)readHash;
+{
+	NSAssert(_hasOutstandingHashRead == NO, @"-[readHash] can't be called again until the previous request has finished");
+	_hasOutstandingHashRead = YES;
+	[_socket readDataToLength:4 withTimeout:-1 tag:kTagLength];
+}
+-(NSString*)description;
+{
+	return [NSString stringWithFormat:@"<TCAsyncHashProtocol@%p over %@>", self, _socket];
+}
+@end
+
+static NSString *TCUUID(void)
+{
+    CFUUIDRef uuid = CFUUIDCreate(NULL);
+    NSString *uuidS = (__bridge_transfer NSString*)CFUUIDCreateString(NULL, uuid);
+    CFRelease(uuid);
+	return uuidS;
+}
+
+
