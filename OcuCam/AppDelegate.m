@@ -203,7 +203,8 @@
 		_extW.screen = _screen;
 		_extW.hidden = NO;
 		_externalVC.view.frame = _screen.fixedCoordinateSpace.bounds;
-		[_extW addSubview:_externalVC.view];
+        _extW.rootViewController = _externalVC;
+		//[_extW addSubview:_externalVC.view];
 	}
 }
 @end
