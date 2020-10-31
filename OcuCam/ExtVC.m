@@ -91,7 +91,8 @@
 	[self adjustTransform];
 	if(_preview)
 		[_replicator addSublayer:_preview];
-	OcuHUDLayer *hud = [[OcuHUDLayer alloc] initWithFrame:r];
+	OcuHUDLayer *hud = [[OcuHUDLayer alloc] init];
+    hud.frame = r;
 	[_replicator addSublayer:hud];
 	
 	_remoteImageLayer = [[CALayer alloc] init];

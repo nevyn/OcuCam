@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		051E51E919FAD1B800AAD15E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E51E819FAD1B800AAD15E /* AppDelegate.swift */; };
+		051E51EB19FAD1B800AAD15E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E51EA19FAD1B800AAD15E /* ViewController.swift */; };
+		051E51EE19FAD1B800AAD15E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 051E51EC19FAD1B800AAD15E /* Main.storyboard */; };
+		051E51F019FAD1B800AAD15E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051E51EF19FAD1B800AAD15E /* Images.xcassets */; };
+		051E51F319FAD1B800AAD15E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 051E51F119FAD1B800AAD15E /* LaunchScreen.xib */; };
+		051E51FF19FAD1B800AAD15E /* OcuHUDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E51FE19FAD1B800AAD15E /* OcuHUDTests.swift */; };
+		051E520919FAD25A00AAD15E /* OcuHUDLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051E520819FAD25A00AAD15E /* OcuHUDLayer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		051E51F919FAD1B800AAD15E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E51DB19FAD1B800AAD15E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 051E51E219FAD1B800AAD15E;
+			remoteInfo = OcuHUD;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		051E51E319FAD1B800AAD15E /* OcuHUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OcuHUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		051E51E719FAD1B800AAD15E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		051E51E819FAD1B800AAD15E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		051E51EA19FAD1B800AAD15E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		051E51ED19FAD1B800AAD15E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		051E51EF19FAD1B800AAD15E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		051E51F219FAD1B800AAD15E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		051E51F819FAD1B800AAD15E /* OcuHUDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OcuHUDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		051E51FD19FAD1B800AAD15E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		051E51FE19FAD1B800AAD15E /* OcuHUDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OcuHUDTests.swift; sourceTree = "<group>"; };
+		051E520819FAD25A00AAD15E /* OcuHUDLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OcuHUDLayer.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		051E51E019FAD1B800AAD15E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		051E51F519FAD1B800AAD15E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		051E51DA19FAD1B800AAD15E = {
+			isa = PBXGroup;
+			children = (
+				051E51E519FAD1B800AAD15E /* OcuHUD */,
+				051E51FB19FAD1B800AAD15E /* OcuHUDTests */,
+				051E51E419FAD1B800AAD15E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		051E51E419FAD1B800AAD15E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				051E51E319FAD1B800AAD15E /* OcuHUD.app */,
+				051E51F819FAD1B800AAD15E /* OcuHUDTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		051E51E519FAD1B800AAD15E /* OcuHUD */ = {
+			isa = PBXGroup;
+			children = (
+				051E51E819FAD1B800AAD15E /* AppDelegate.swift */,
+				051E51EA19FAD1B800AAD15E /* ViewController.swift */,
+				051E520819FAD25A00AAD15E /* OcuHUDLayer.swift */,
+				051E51EC19FAD1B800AAD15E /* Main.storyboard */,
+				051E51EF19FAD1B800AAD15E /* Images.xcassets */,
+				051E51F119FAD1B800AAD15E /* LaunchScreen.xib */,
+				051E51E619FAD1B800AAD15E /* Supporting Files */,
+			);
+			path = OcuHUD;
+			sourceTree = "<group>";
+		};
+		051E51E619FAD1B800AAD15E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				051E51E719FAD1B800AAD15E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		051E51FB19FAD1B800AAD15E /* OcuHUDTests */ = {
+			isa = PBXGroup;
+			children = (
+				051E51FE19FAD1B800AAD15E /* OcuHUDTests.swift */,
+				051E51FC19FAD1B800AAD15E /* Supporting Files */,
+			);
+			path = OcuHUDTests;
+			sourceTree = "<group>";
+		};
+		051E51FC19FAD1B800AAD15E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				051E51FD19FAD1B800AAD15E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		051E51E219FAD1B800AAD15E /* OcuHUD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 051E520219FAD1B800AAD15E /* Build configuration list for PBXNativeTarget "OcuHUD" */;
+			buildPhases = (
+				051E51DF19FAD1B800AAD15E /* Sources */,
+				051E51E019FAD1B800AAD15E /* Frameworks */,
+				051E51E119FAD1B800AAD15E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OcuHUD;
+			productName = OcuHUD;
+			productReference = 051E51E319FAD1B800AAD15E /* OcuHUD.app */;
+			productType = "com.apple.product-type.application";
+		};
+		051E51F719FAD1B800AAD15E /* OcuHUDTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 051E520519FAD1B800AAD15E /* Build configuration list for PBXNativeTarget "OcuHUDTests" */;
+			buildPhases = (
+				051E51F419FAD1B800AAD15E /* Sources */,
+				051E51F519FAD1B800AAD15E /* Frameworks */,
+				051E51F619FAD1B800AAD15E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				051E51FA19FAD1B800AAD15E /* PBXTargetDependency */,
+			);
+			name = OcuHUDTests;
+			productName = OcuHUDTests;
+			productReference = 051E51F819FAD1B800AAD15E /* OcuHUDTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		051E51DB19FAD1B800AAD15E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Thirdcog;
+				TargetAttributes = {
+					051E51E219FAD1B800AAD15E = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					051E51F719FAD1B800AAD15E = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 051E51E219FAD1B800AAD15E;
+					};
+				};
+			};
+			buildConfigurationList = 051E51DE19FAD1B800AAD15E /* Build configuration list for PBXProject "OcuHUD" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 051E51DA19FAD1B800AAD15E;
+			productRefGroup = 051E51E419FAD1B800AAD15E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				051E51E219FAD1B800AAD15E /* OcuHUD */,
+				051E51F719FAD1B800AAD15E /* OcuHUDTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		051E51E119FAD1B800AAD15E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				051E51EE19FAD1B800AAD15E /* Main.storyboard in Resources */,
+				051E51F319FAD1B800AAD15E /* LaunchScreen.xib in Resources */,
+				051E51F019FAD1B800AAD15E /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		051E51F619FAD1B800AAD15E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		051E51DF19FAD1B800AAD15E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				051E51EB19FAD1B800AAD15E /* ViewController.swift in Sources */,
+				051E51E919FAD1B800AAD15E /* AppDelegate.swift in Sources */,
+				051E520919FAD25A00AAD15E /* OcuHUDLayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		051E51F419FAD1B800AAD15E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				051E51FF19FAD1B800AAD15E /* OcuHUDTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		051E51FA19FAD1B800AAD15E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 051E51E219FAD1B800AAD15E /* OcuHUD */;
+			targetProxy = 051E51F919FAD1B800AAD15E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		051E51EC19FAD1B800AAD15E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				051E51ED19FAD1B800AAD15E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		051E51F119FAD1B800AAD15E /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				051E51F219FAD1B800AAD15E /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		051E520019FAD1B800AAD15E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		051E520119FAD1B800AAD15E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		051E520319FAD1B800AAD15E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = OcuHUD/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		051E520419FAD1B800AAD15E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = OcuHUD/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		051E520619FAD1B800AAD15E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = OcuHUDTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OcuHUD.app/OcuHUD";
+			};
+			name = Debug;
+		};
+		051E520719FAD1B800AAD15E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = OcuHUDTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OcuHUD.app/OcuHUD";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		051E51DE19FAD1B800AAD15E /* Build configuration list for PBXProject "OcuHUD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				051E520019FAD1B800AAD15E /* Debug */,
+				051E520119FAD1B800AAD15E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		051E520219FAD1B800AAD15E /* Build configuration list for PBXNativeTarget "OcuHUD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				051E520319FAD1B800AAD15E /* Debug */,
+				051E520419FAD1B800AAD15E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		051E520519FAD1B800AAD15E /* Build configuration list for PBXNativeTarget "OcuHUDTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				051E520619FAD1B800AAD15E /* Debug */,
+				051E520719FAD1B800AAD15E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 051E51DB19FAD1B800AAD15E /* Project object */;
+}
